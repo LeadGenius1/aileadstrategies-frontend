@@ -192,6 +192,7 @@
         
         .google-btn-container {
             margin-top: 15px;
+            min-height: 44px;
         }
         
         .message {
@@ -270,21 +271,7 @@
                 <div class="divider">
                     <span>OR</span>
                 </div>
-                <div class="google-btn-container">
-                    <div id="g_id_onload_login"
-                         data-client_id="1022885462325-705kc6vuv96f828iegacs6p8csjr09dk.apps.googleusercontent.com"
-                         data-callback="handleGoogleAuth">
-                    </div>
-                    <div class="g_id_signin" 
-                         data-type="standard"
-                         data-shape="rectangular"
-                         data-theme="outline"
-                         data-text="signin_with"
-                         data-size="large"
-                         data-logo_alignment="left"
-                         data-width="100%">
-                    </div>
-                </div>
+                <div id="google-login-btn" class="google-btn-container"></div>
             </form>
             
             <form id="register-form" class="auth-form" onsubmit="handleRegister(event)">
@@ -305,33 +292,13 @@
                 <div class="divider">
                     <span>OR</span>
                 </div>
-                <div class="google-btn-container">
-                    <div id="g_id_onload_register"
-                         data-client_id="1022885462325-705kc6vuv96f828iegacs6p8csjr09dk.apps.googleusercontent.com"
-                         data-callback="handleGoogleAuth">
-                    </div>
-                    <div class="g_id_signin" 
-                         data-type="standard"
-                         data-shape="rectangular"
-                         data-theme="outline"
-                         data-text="continue_with"
-                         data-size="large"
-                         data-logo_alignment="left"
-                         data-width="100%">
-                    </div>
-                </div>
+                <div id="google-register-btn" class="google-btn-container"></div>
             </form>
             
             <div id="auth-message"></div>
         </div>
         
         <div class="platforms">
-            <div class="platform-card" onclick="showPlatformDetails('tackle.ai')">
-                <div class="platform-icon">💼</div>
-                <h3 class="platform-title">Tackle AI</h3>
-                <p class="platform-description">Replace HubSpot+Gong+Outreach. Full CRM with 7 AI agents. Save $44,812/year.</p>
-            </div>
-            
             <div class="platform-card" onclick="showPlatformDetails('leadsite.ai')">
                 <div class="platform-icon">🎯</div>
                 <h3 class="platform-title">LeadSite AI</h3>
@@ -360,8 +327,63 @@
     
     <script>
         const API_URL = 'https://backend-production-2987.up.railway.app';
+        const GOOGLE_CLIENT_ID = '1022885462325-705kc6vuv96f828iegacs6p8csjr09dk.apps.googleusercontent.com';
         let currentUser = null;
         let authToken = localStorage.getItem('authToken');
+        
+        // Initialize Google Sign-In buttons with retry logic
+        function initializeGoogleSignIn() {
+            const maxRetries = 10;
+            const retryDelayMs = 300;
+            
+            function tryRender() {
+                if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+                    // Render Login button
+                    const loginContainer = document.getElementById('google-login-btn');
+                    if (loginContainer && loginContainer.children.length === 0) {
+                        google.accounts.id.initialize({
+                            client_id: GOOGLE_CLIENT_ID,
+                            callback: handleGoogleAuth
+                        });
+                        google.accounts.id.renderButton(loginContainer, {
+                            type: 'standard',
+                            theme: 'outline',
+                            size: 'large',
+                            text: 'signin_with',
+                            shape: 'rectangular',
+                            logo_alignment: 'left',
+                            width: loginContainer.offsetWidth || 320
+                        });
+                    }
+                    // Render Register button (same callback; backend handles login vs register by credential)
+                    const registerContainer = document.getElementById('google-register-btn');
+                    if (registerContainer && registerContainer.children.length === 0) {
+                        google.accounts.id.renderButton(registerContainer, {
+                            type: 'standard',
+                            theme: 'outline',
+                            size: 'large',
+                            text: 'continue_with',
+                            shape: 'rectangular',
+                            logo_alignment: 'left',
+                            width: registerContainer.offsetWidth || 320
+                        });
+                    }
+                    return true;
+                }
+                return false;
+            }
+            
+            function attempt(attemptNum) {
+                if (tryRender()) return;
+                if (attemptNum >= maxRetries) {
+                    console.warn('Google Sign-In: API not available after retries.');
+                    return;
+                }
+                setTimeout(function() { attempt(attemptNum + 1); }, retryDelayMs);
+            }
+            
+            attempt(0);
+        }
         
         // Check API status
         async function checkAPIStatus() {
@@ -475,7 +497,7 @@
                     showMessage(`Welcome ${data.user.name}! ${data.user.trial_days_remaining} days of trial remaining.`, 'success');
                     updateUIForLoggedInUser();
                 } else {
-                    showMessage('Google sign-in failed: ' + data.error, 'error');
+                    showMessage('Google sign-in failed: ' + (data.error || 'Unknown error'), 'error');
                 }
             } catch (error) {
                 console.error('Google auth error:', error);
@@ -490,7 +512,6 @@
             document.getElementById('user-name').textContent = currentUser.name;
             document.getElementById('user-email').textContent = currentUser.email;
             
-            // Add dashboard button
             if (!document.getElementById('dashboard-btn')) {
                 const profileDiv = document.getElementById('user-profile');
                 const dashboardBtn = document.createElement('button');
@@ -519,7 +540,6 @@
                 showMessage('Please login to access platform features', 'error');
                 return;
             }
-            // Navigate to dashboard with the selected platform
             window.location.href = `/dashboard.html?domain=${platform}`;
         }
         
@@ -561,7 +581,8 @@
         // Initialize
         checkAPIStatus();
         checkExistingAuth();
-        setInterval(checkAPIStatus, 30000); // Check API status every 30 seconds
+        initializeGoogleSignIn();
+        setInterval(checkAPIStatus, 30000);
     </script>
 </body>
 </html>
