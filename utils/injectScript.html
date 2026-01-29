@@ -1,0 +1,86 @@
+<!-- 
+  Add this script tag to your HTML file's <head> section, 
+  BEFORE any other scripts including Clerk 
+-->
+
+<script>
+(function() {
+  // This runs immediately when the page loads
+  if (typeof window === 'undefined') return;
+
+  // Store original console methods
+  const originalLog = console.log;
+  const originalWarn = console.warn;
+  const originalError = console.error;
+  
+  let clerkWarningShown = false;
+
+  // Override all console methods to filter messages
+  ['log', 'warn', 'error'].forEach(method => {
+    const original = console[method];
+    console[method] = function() {
+      const msg = arguments[0]?.toString() || '';
+      
+      // Skip "Invalid message origin or structure"
+      if (msg.includes('Invalid message origin or structure')) {
+        return;
+      }
+      
+      // Show Clerk dev warning only once
+      if (method === 'warn' && msg.includes('Clerk has been loaded with development keys')) {
+        if (clerkWarningShown) return;
+        clerkWarningShown = true;
+      }
+      
+      return original.apply(console, arguments);
+    };
+  });
+
+  // Intercept ALL message events before they reach other handlers
+  const script = document.createElement('script');
+  script.textContent = `
+    (function() {
+      const originalAddEventListener = EventTarget.prototype.addEventListener;
+      EventTarget.prototype.addEventListener = function(type, listener, options) {
+        if (type === 'message' && this === window) {
+          const wrappedListener = function(event) {
+            // Filter out problematic messages
+            if (!event.data || 
+                (typeof event.data === 'string' && 
+                 (event.data.includes('webpackHotUpdate') ||
+                  event.data.includes('__parcel') ||
+                  event.data.includes('vite:') ||
+                  event.data === ''))) {
+              return;
+            }
+            
+            try {
+              listener.call(this, event);
+            } catch (err) {
+              if (!err.message?.includes('Invalid message')) {
+                console.error(err);
+              }
+            }
+          };
+          return originalAddEventListener.call(this, type, wrappedListener, options);
+        }
+        return originalAddEventListener.call(this, type, listener, options);
+      };
+    })();
+  `;
+  
+  // Insert this script as the very first script in the document
+  if (document.head) {
+    document.head.insertBefore(script, document.head.firstChild);
+  } else {
+    // If head doesn't exist yet, wait for it
+    const observer = new MutationObserver((mutations, obs) => {
+      if (document.head) {
+        document.head.insertBefore(script, document.head.firstChild);
+        obs.disconnect();
+      }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
+})();
+</script>

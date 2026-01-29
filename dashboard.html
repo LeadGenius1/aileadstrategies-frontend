@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI Lead Strategies Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --dark-color: #1f2937;
+            --light-color: #f9fafb;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f9fafb;
+            min-height: 100vh;
+            color: #1f2937;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .domain-selector {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            background: white;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+        
+        .user-menu:hover {
+            background: #f3f4f6;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Sidebar */
+        .container {
+            display: flex;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            height: calc(100vh - 65px);
+            padding: 1rem;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            color: #4b5563;
+        }
+        
+        .nav-item:hover {
+            background: #f3f4f6;
+        }
+        
+        .nav-item.active {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary-color);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            height: calc(100vh - 65px);
+        }
+        
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-subtitle {
+            color: #6b7280;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-change {
+            font-size: 0.875rem;
+            color: var(--success-color);
+        }
+        
+        .stat-change.negative {
+            color: var(--error-color);
+        }
+        
+        /* Features Grid */
+        .features-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .feature-usage {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        /* Activity Feed */
+        .activity-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-message {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .activity-time {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        /* Loading State */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e5e7eb;
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Error State */
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .error-message.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <span id="domain-logo">🚀</span>
+                <span id="domain-name">AI Lead Strategies</span>
+            </div>
+            <select class="domain-selector" id="domain-selector" onchange="switchDomain(this.value)">
+                <option value="aileadstrategies.com">AI Lead Strategies</option>
+                <option value="leadsite.ai">LeadSite AI</option>
+                <option value="leadsite.io">LeadSite IO</option>
+                <option value="clientcontact.ai">ClientContact AI</option>
+                <option value="videosite.ai">VideoSite AI</option>
+                <option value="tackle.ai">Tackle AI</option>
+            </select>
+        </div>
+        <div class="header-right">
+            <div class="user-menu" onclick="toggleUserMenu()">
+                <div class="avatar" id="user-avatar">U</div>
+                <span id="user-name">User</span>
+            </div>
+            <button onclick="logout()" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 0.375rem; cursor: pointer;">Logout</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav>
+                <div class="nav-item active" onclick="navigateTo('dashboard')">
+                    <span>🏠</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('leads')">
+                    <span>👥</span>
+                    <span>Leads</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('campaigns')">
+                    <span>🚀</span>
+                    <span>Campaigns</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('analytics')">
+                    <span>📊</span>
+                    <span>Analytics</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('settings')">
+                    <span>⚙️</span>
+                    <span>Settings</span>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading dashboard...</p>
+            </div>
+            
+            <div class="error-message" id="error-message"></div>
+            
+            <div id="dashboard-content">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">Welcome to your Dashboard</h1>
+                    <p class="dashboard-subtitle" id="dashboard-subtitle">Manage your AI-powered lead generation platform</p>
+                </div>
+                
+                <!-- Stats Grid -->
+                <div class="stats-grid" id="stats-grid">
+                    <!-- Stats will be dynamically loaded -->
+                </div>
+                
+                <!-- Features Section -->
+                <div class="features-section">
+                    <h2 class="section-title">Platform Features</h2>
+                    <div class="features-grid" id="features-grid">
+                        <!-- Features will be dynamically loaded -->
+                    </div>
+                </div>
+                
+                <!-- Activity Feed -->
+                <div class="activity-section">
+                    <h2 class="section-title">Recent Activity</h2>
+                    <div id="activity-feed">
+                        <!-- Activity items will be dynamically loaded -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:3001';
+        let authToken = localStorage.getItem('authToken');
+        let currentDomain = 'aileadstrategies.com';
+        let dashboardData = null;
+        
+        // Domain configurations
+        const domainConfigs = {
+            'aileadstrategies.com': {
+                name: 'AI Lead Strategies',
+                logo: '🚀',
+                color: '#667eea'
+            },
+            'leadsite.ai': {
+                name: 'LeadSite AI',
+                logo: '🎯',
+                color: '#3b82f6'
+            },
+            'leadsite.io': {
+                name: 'LeadSite IO',
+                logo: '🏗️',
+                color: '#10b981'
+            },
+            'clientcontact.ai': {
+                name: 'ClientContact AI',
+                logo: '📬',
+                color: '#f59e0b'
+            },
+            'videosite.ai': {
+                name: 'VideoSite AI',
+                logo: '🎬',
+                color: '#ef4444'
+            },
+            'tackle.ai': {
+                name: 'Tackle AI',
+                logo: '💼',
+                color: '#8b5cf6'
+            }
+        };
+        
+        // Check authentication on load
+        async function checkAuth() {
+            if (!authToken) {
+                window.location.href = '/index.html';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/api/user/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Authentication failed');
+                }
+                
+                const userData = await response.json();
+                document.getElementById('user-name').textContent = userData.name;
+                document.getElementById('user-avatar').textContent = userData.name.charAt(0).toUpperCase();
+                
+                // Load dashboard for current domain
+                await loadDashboard();
+                
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                localStorage.removeItem('authToken');
+                window.location.href = '/index.html';
+            }
+        }
+        
+        // Load dashboard data
+        async function loadDashboard() {
+            const loading = document.getElementById('loading');
+            const errorMsg = document.getElementById('error-message');
+            const content = document.getElementById('dashboard-content');
+            
+            loading.classList.add('active');
+            errorMsg.classList.remove('active');
+            content.style.display = 'none';
+            
+            try {
+                const response = await fetch(`${API_URL}/api/dashboard?domain=${currentDomain}`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'X-Domain': currentDomain
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load dashboard');
+                }
+                
+                dashboardData = await response.json();
+                renderDashboard();
+                
+                loading.classList.remove('active');
+                content.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Dashboard load failed:', error);
+                loading.classList.remove('active');
+                errorMsg.textContent = 'Failed to load dashboard. Please try again.';
+                errorMsg.classList.add('active');
+            }
+        }
+        
+        // Render dashboard content
+        function renderDashboard() {
+            if (!dashboardData) return;
+            
+            // Update header with domain info
+            const config = domainConfigs[currentDomain];
+            document.getElementById('domain-logo').textContent = config.logo;
+            document.getElementById('domain-name').textContent = config.name;
+            document.getElementById('dashboard-subtitle').textContent = `Manage your ${config.name} platform`;
+            
+            // Render stats
+            const statsGrid = document.getElementById('stats-grid');
+            statsGrid.innerHTML = '';
+            
+            const stats = dashboardData.stats;
+            Object.entries(stats).forEach(([key, value]) => {
+                const statCard = document.createElement('div');
+                statCard.className = 'stat-card';
+                
+                // Format the key for display
+                const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                
+                // Determine if there's a growth indicator
+                const growth = typeof value === 'string' && value.includes('%') && key === 'growth' ? value : null;
+                
+                statCard.innerHTML = `
+                    <div class="stat-label">${label}</div>
+                    <div class="stat-value">${value}</div>
+                    ${growth ? `<div class="stat-change">${growth} from last month</div>` : ''}
+                `;
+                
+                statsGrid.appendChild(statCard);
+            });
+            
+            // Render features
+            const featuresGrid = document.getElementById('features-grid');
+            featuresGrid.innerHTML = '';
+            
+            dashboardData.features.forEach(feature => {
+                const featureCard = document.createElement('div');
+                featureCard.className = 'feature-card';
+                featureCard.innerHTML = `
+                    <div class="feature-icon">${feature.icon}</div>
+                    <div class="feature-name">${feature.name}</div>
+                    <div class="feature-usage">Usage: ${feature.usage || 'Active'}</div>
+                `;
+                featureCard.onclick = () => alert(`${feature.name} feature clicked!`);
+                featuresGrid.appendChild(featureCard);
+            });
+            
+            // Render activity feed
+            const activityFeed = document.getElementById('activity-feed');
+            activityFeed.innerHTML = '';
+            
+            // Mock activity data
+            const activities = [
+                { icon: '➕', message: 'New lead captured', time: '2 hours ago' },
+                { icon: '🚀', message: 'Campaign launched', time: '5 hours ago' },
+                { icon: '📊', message: 'Weekly report generated', time: '1 day ago' },
+                { icon: '🔗', message: 'Integration connected', time: '2 days ago' },
+                { icon: '🎉', message: 'Milestone reached!', time: '3 days ago' }
+            ];
+            
+            activities.forEach(activity => {
+                const activityItem = document.createElement('div');
+                activityItem.className = 'activity-item';
+                activityItem.innerHTML = `
+                    <div class="activity-icon">${activity.icon}</div>
+                    <div class="activity-content">
+                        <div class="activity-message">${activity.message}</div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                `;
+                activityFeed.appendChild(activityItem);
+            });
+        }
+        
+        // Switch domain
+        function switchDomain(domain) {
+            currentDomain = domain;
+            loadDashboard();
+        }
+        
+        // Navigation
+        function navigateTo(page) {
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.nav-item').classList.add('active');
+            
+            // In a real app, this would load different content
+            alert(`Navigating to ${page} for ${currentDomain}`);
+        }
+        
+        // Logout
+        function logout() {
+            localStorage.removeItem('authToken');
+            window.location.href = '/index.html';
+        }
+        
+        // Toggle user menu (placeholder)
+        function toggleUserMenu() {
+            alert('User menu options: Profile, Settings, Help');
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', checkAuth);
+        
+        // Auto-refresh dashboard every 30 seconds
+        setInterval(() => {
+            if (authToken) {
+                loadDashboard();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
