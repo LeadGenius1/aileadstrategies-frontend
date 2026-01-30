@@ -1,1257 +1,703 @@
 <!DOCTYPE html>
-<!-- AETHER UI v2.1.0 - Build: 20260130-2130 - DARK THEME INFINITE REVENUE -->
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>AI Lead Strategies - ONE PLATFORM INFINITE REVENUE</title>
-    <!-- AETHER UI - Force deployment update -->
-    <!-- Google Sign-In -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <title>AI Lead Strategies - The Future of Marketing is AI</title>
+    <meta name="description" content="Four powerful AI platforms working together to transform your marketing, lead generation, and customer engagement. Built for agencies, optimized for results.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary-color: #00d4ff;
-            --secondary-color: #7c3aed;
-            --accent-color: #f59e0b;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --error-color: #ef4444;
-            --dark-bg: #0a0a0f;
-            --dark-card: #12121a;
-            --dark-border: #1f1f2e;
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
-            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #f59e0b 100%);
-            --gradient-card: linear-gradient(145deg, #12121a 0%, #1a1a2e 100%);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--dark-bg);
-            min-height: 100vh;
-            color: var(--text-primary);
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #02040a;
+            color: #d4d4d4;
+            -webkit-font-smoothing: antialiased;
         }
         
-        /* Animated background */
-        .bg-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* Glass Card Effects */
+        .glass-card {
+            background: rgba(10, 20, 40, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(10, 25, 50, 0.6);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+        
+        .glass-nav {
+            background: rgba(2, 4, 10, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+        }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to bottom right, #ffffff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-alt {
+            background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Grid Background */
+        .grid-bg {
+            background-size: 40px 40px;
             background-image: 
-                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+        }
+        
+        /* Glow Effect */
+        .glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -300px;
+            left: 50%;
+            transform: translateX(-50%);
             pointer-events: none;
             z-index: 0;
         }
         
-        /* Navbar - AETHER Dark */
-        .navbar {
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--dark-border);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* Animations */
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
         }
         
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        @keyframes pulse-blue {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
         }
         
-        .navbar-brand::before {
-            content: '◆';
-            -webkit-text-fill-color: var(--primary-color);
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         
-        .navbar-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         
-        .navbar-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
+        .animate-scan {
+            animation: scan 2s linear infinite;
         }
         
-        .navbar-links a:hover {
-            color: var(--primary-color);
+        .animate-pulse-blue {
+            animation: pulse-blue 2s infinite;
         }
         
-        .navbar-links a::after {
-            content: '';
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient-shift 5s ease infinite;
+        }
+        
+        /* Spotlight Effect */
+        .spotlight {
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-            transition: width 0.3s;
-        }
-        
-        .navbar-links a:hover::after {
+            height: 100%;
             width: 100%;
-        }
-        
-        .navbar-cta {
-            display: flex;
-            gap: 0.75rem;
-        }
-        
-        .btn-nav {
-            padding: 0.6rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
-            border: none;
-            font-size: 0.9375rem;
-        }
-        
-        .btn-nav.outline {
-            background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-        
-        .btn-nav.outline:hover {
-            background: var(--primary-color);
-            color: var(--dark-bg);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-        }
-        
-        .btn-nav.primary {
-            background: var(--gradient-primary);
-            color: var(--dark-bg);
-            font-weight: 700;
-        }
-        
-        .btn-nav.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-        }
-        
-        /* Hero Section - AETHER Dark */
-        .hero {
-            position: relative;
-            padding: 6rem 2rem 4rem;
-            text-align: center;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, rgba(124, 58, 237, 0.1) 40%, transparent 70%);
-            pointer-events: none;
-        }
-        
-        .hero-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero-badge {
-            display: inline-block;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 0.5rem 1.25rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
-            letter-spacing: 0.5px;
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            line-height: 1.1;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-        
-        .hero h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-        }
-        
-        .hero .tagline {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-stats {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .hero-stat {
-            text-align: center;
-        }
-        
-        .hero-stat .number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-stat .label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn-hero {
-            padding: 1rem 2.5rem;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .btn-hero.primary {
-            background: var(--gradient-primary);
-            color: var(--dark-bg);
-        }
-        
-        .btn-hero.primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
-        }
-        
-        .btn-hero.secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--dark-border);
-        }
-        
-        .btn-hero.secondary:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-        
-        /* Platform Cards Section */
-        .section {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Platform Cards Grid - 5 Cards */
-        .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-        
-        .platform-card {
-            background: var(--gradient-card);
-            border: 1px solid var(--dark-border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.4s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .platform-card::before {
-            content: '';
-            position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), 
+                rgba(59, 130, 246, 0.06), transparent 40%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 10;
         }
         
-        .platform-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-        
-        .platform-card:hover::before {
+        .glass-card:hover .spotlight {
             opacity: 1;
         }
         
-        .platform-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--gradient-primary);
-            border-radius: 12px;
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
+        /* Glow Button */
+        .glow-button {
+            background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
         }
         
-        .platform-title {
-            font-size: 1.35rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-        
-        .platform-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .platform-price {
-            display: flex;
-            align-items: baseline;
-            gap: 0.25rem;
-            margin-bottom: 1rem;
-        }
-        
-        .platform-price .amount {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary-color);
-        }
-        
-        .platform-price .period {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-        
-        .platform-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-        
-        .platform-features li {
-            padding: 0.4rem 0;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .platform-features li::before {
-            content: '✓';
-            color: var(--success-color);
-            font-weight: bold;
-        }
-        
-        .platform-btn {
-            width: 100%;
-            padding: 0.875rem;
-            background: transparent;
-            border: 2px solid var(--dark-border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .platform-btn:hover {
-            background: var(--gradient-primary);
-            border-color: transparent;
-            color: var(--dark-bg);
-        }
-        
-        /* Featured Platform */
-        .platform-card.featured {
-            border-color: var(--primary-color);
-            transform: scale(1.02);
-        }
-        
-        .platform-card.featured::before {
-            opacity: 1;
-        }
-        
-        .platform-card.featured .platform-btn {
-            background: var(--gradient-primary);
-            border-color: transparent;
-            color: var(--dark-bg);
-        }
-        
-        .featured-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--accent-color);
-            color: var(--dark-bg);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        
-        /* Auth Section */
-        .auth-section {
-            background: var(--dark-card);
-            border: 1px solid var(--dark-border);
-            border-radius: 16px;
-            padding: 2.5rem;
-            max-width: 480px;
-            margin: 0 auto 3rem;
-        }
-        
-        .auth-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            background: var(--dark-bg);
-            padding: 0.25rem;
-            border-radius: 10px;
-        }
-        
-        .tab-btn {
-            flex: 1;
-            padding: 0.875rem 1.5rem;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        
-        .tab-btn.active {
-            background: var(--gradient-primary);
-            color: var(--dark-bg);
-        }
-        
-        .auth-form {
-            display: none;
-        }
-        
-        .auth-form.active {
-            display: block;
-        }
-        
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.9375rem;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            background: var(--dark-bg);
-            border: 1px solid var(--dark-border);
-            border-radius: 8px;
-            font-size: 1rem;
-            color: var(--text-primary);
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
-        }
-        
-        .form-group input::placeholder {
-            color: var(--text-secondary);
-        }
-        
-        .btn {
-            padding: 0.875rem 1.5rem;
-            background: var(--gradient-primary);
-            color: var(--dark-bg);
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        
-        .btn:hover {
+        .glow-button:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(124, 58, 237, 0.4);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
         }
         
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 1.5rem 0;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
+        /* Platform Icon Gradients */
+        .icon-blue-cyan {
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
         }
         
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid var(--dark-border);
+        .icon-blue-purple {
+            background: linear-gradient(135deg, #0ea5e9, #a855f7);
         }
         
-        .divider span {
-            padding: 0 1rem;
+        .icon-cyan-blue {
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9);
         }
         
-        .google-btn-container {
-            margin-top: 1rem;
-            min-height: 44px;
+        .icon-indigo-purple {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
         }
         
-        .message {
-            padding: 0.875rem 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            font-size: 0.9375rem;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
         
-        .message.success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success-color);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+        ::-webkit-scrollbar-track {
+            background: #02040a;
         }
         
-        .message.error {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--error-color);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+        ::-webkit-scrollbar-thumb {
+            background: #1e3a8a;
+            border-radius: 4px;
         }
         
-        .user-profile {
-            background: var(--dark-card);
-            border: 1px solid var(--dark-border);
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 480px;
-            margin: 0 auto 3rem;
-            display: none;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
         }
-        
-        .user-profile.active {
-            display: block;
-        }
-        
-        .logout-btn {
-            background: var(--error-color);
-            padding: 0.5rem 1.25rem;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            float: right;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .logout-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            background: var(--dark-card);
-            border-top: 1px solid var(--dark-border);
-            border-bottom: 1px solid var(--dark-border);
-            padding: 4rem 2rem;
-        }
-        
-        .testimonials-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2.5rem;
-        }
-        
-        .testimonial-card {
-            background: var(--dark-bg);
-            padding: 1.75rem;
-            border-radius: 12px;
-            border: 1px solid var(--dark-border);
-        }
-        
-        .testimonial-card p {
-            font-style: italic;
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            line-height: 1.6;
-        }
-        
-        .testimonial-card .author {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.9375rem;
-        }
-        
-        .testimonial-rating {
-            color: var(--accent-color);
-            margin-bottom: 0.75rem;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--dark-bg);
-            border-top: 1px solid var(--dark-border);
-            color: var(--text-secondary);
-            padding: 3rem 2rem;
-        }
-        
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-        
-        .footer-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-color);
-        }
-        
-        .footer-copy {
-            font-size: 0.875rem;
-            margin-top: 1rem;
-            width: 100%;
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--dark-border);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero h2 { font-size: 1rem; letter-spacing: 2px; }
-            .hero .tagline { font-size: 1rem; }
-            .navbar-links { display: none; }
-            .hero-stats { gap: 1.5rem; }
-            .hero-stat .number { font-size: 2rem; }
-            .platforms-grid { grid-template-columns: 1fr; }
-            .platform-card.featured { transform: none; }
-        }
-        
-        /* Status Badge */
-        .status-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            background: var(--success-color);
-            color: white;
-            border-radius: 2rem;
-            font-size: 0.8125rem;
-            font-weight: 500;
-        }
+        /* Hero Video - AETHER UI */
+        .hero-video-wrap { position: relative; border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 1rem; overflow: hidden; max-width: 56rem; margin: 2rem auto 0; }
+        .hero-video-wrap .hero-video { width: 100%; display: block; }
+        .aether-badge { position: fixed; bottom: 1rem; right: 1rem; z-index: 50; padding: 0.35rem 0.75rem; background: rgba(14, 165, 233, 0.2); border: 1px solid rgba(14, 165, 233, 0.4); border-radius: 8px; font-size: 0.75rem; font-weight: 600; color: #38bdf8; }
     </style>
 </head>
-<body>
-    <!-- DEBUG: AETHER UI v2.1.0 - Dark Theme - Build 20260130-2130 -->
-    <div id="deploy-version" style="position:fixed;bottom:10px;right:10px;background:#00d4ff;color:#0a0a0f;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:bold;z-index:9999;opacity:0.8;">AETHER v2.1.0</div>
-    <div class="bg-grid"></div>
-    
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-brand">AI Lead Strategies</div>
-        <div class="navbar-links">
-            <a href="#platforms">Platforms</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#testimonials">Reviews</a>
-            <a href="#auth-section">Sign In</a>
-        </div>
-        <div class="navbar-cta">
-            <button class="btn-nav outline" onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'}); switchTab('login');">Log In</button>
-            <button class="btn-nav primary" onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'}); switchTab('register');">Start Free</button>
+<body class="selection:bg-blue-500/30 selection:text-white relative overflow-x-hidden">
+
+    <!-- Background Grid -->
+    <div class="fixed inset-0 grid-bg z-[-1] pointer-events-none"></div>
+    <div class="glow"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                    <span class="text-white font-bold text-lg">AI</span>
+                </div>
+                <div>
+                    <div class="text-white font-semibold text-sm">AI Lead Strategies</div>
+                    <div class="text-blue-400/70 text-xs">Marketing Intelligence</div>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
+                <a href="#platforms" class="hover:text-blue-400 transition-colors duration-200">Platforms</a>
+                <a href="/leadsite-ai" class="hover:text-blue-400 transition-colors duration-200">LeadSite.AI</a>
+                <a href="/leadsite-io" class="hover:text-blue-400 transition-colors duration-200">LeadSite.IO</a>
+                <a href="/clientcontact-io" class="hover:text-blue-400 transition-colors duration-200">ClientContact</a>
+                <a href="/tackle-io" class="hover:text-blue-400 transition-colors duration-200">Tackle</a>
+                <a href="/videosite-ai" class="hover:text-blue-400 transition-colors duration-200">VideoSite</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="/login" class="hidden sm:block text-sm font-medium text-neutral-400 hover:text-white transition-colors">Sign In</a>
+                <a href="/signup" class="glow-button text-sm font-semibold text-white px-6 py-2.5 rounded-full inline-flex items-center gap-2">
+                    <span>Start Free Trial</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                </a>
+            </div>
         </div>
     </nav>
-    
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-inner">
-            <span class="hero-badge">🚀 Now with AI-Powered Automation</span>
-            <h1>ONE PLATFORM<br>INFINITE REVENUE</h1>
-            <h2>THE FUTURE OF OUTREACH MARKETING</h2>
-            <p class="tagline">Unify lead generation, AI scoring, automated outreach, and video marketing in one powerful platform. Scale your revenue without scaling your team.</p>
-            
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="number">92%</div>
-                    <div class="label">Lead Accuracy</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="number">10x</div>
-                    <div class="label">ROI Average</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="number">22+</div>
-                    <div class="label">Channels</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="number">3 min</div>
-                    <div class="label">Site Build</div>
-                </div>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 md:pt-48 md:pb-32 px-6 relative">
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <!-- Status Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 text-xs font-medium text-blue-200 mb-8 shadow-[0_0_10px_rgba(59,130,246,0.1)] animate-float">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                4 AI Platforms • 500+ Teams • 90% Time Savings
             </div>
             
-            <div class="hero-cta">
-                <a href="#auth-section" class="btn-hero primary" onclick="switchTab('register'); return true;">Start 14-Day Free Trial</a>
-                <a href="#platforms" class="btn-hero secondary">View All Platforms</a>
+            <!-- Main Headline -->
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-gradient mb-6 leading-[1.1]">
+                The Future of<br>Marketing is AI
+            </h1>
+            
+            <!-- Subheadline -->
+            <p class="text-lg md:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed mb-10">
+                Four powerful AI platforms working together to transform your marketing, 
+                lead generation, and customer engagement. Built for agencies, optimized for results.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="#platforms" class="glow-button w-full sm:w-auto px-10 py-4 text-white font-semibold rounded-xl inline-flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <span>Explore Our Platforms</span>
+                </a>
+                <a href="#hero-video" class="w-full sm:w-auto px-10 py-4 glass-card text-white font-semibold rounded-xl hover:bg-white/5 transition-all duration-200 inline-flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/>
+                    </svg>
+                    <span>Watch Demo</span>
+                </a>
+                <a href="/signup" class="w-full sm:w-auto px-10 py-4 glass-card text-white font-semibold rounded-xl hover:bg-white/5 transition-all duration-200 inline-flex items-center justify-center gap-2">
+                    <span>Start Free Trial</span>
+                </a>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="flex flex-wrap justify-center gap-6 text-sm">
+                <div class="flex items-center gap-2 glass-card px-4 py-2 rounded-lg">
+                    <span class="text-2xl">🤖</span>
+                    <span class="font-medium text-white">4 AI Platforms</span>
+                </div>
+                <div class="flex items-center gap-2 glass-card px-4 py-2 rounded-lg">
+                    <span class="text-2xl">⚡</span>
+                    <span class="font-medium text-white">90% Time Savings</span>
+                </div>
+                <div class="flex items-center gap-2 glass-card px-4 py-2 rounded-lg">
+                    <span class="text-2xl">📈</span>
+                    <span class="font-medium text-white">3x Conversions</span>
+                </div>
+                <div class="flex items-center gap-2 glass-card px-4 py-2 rounded-lg">
+                    <span class="text-2xl">🎯</span>
+                    <span class="font-medium text-white">Proven Results</span>
+                </div>
+            </div>
+            <!-- Hero Video - AETHER UI -->
+            <div id="hero-video" class="hero-video-wrap mt-12">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="meeting-handshake.mp4" type="video/mp4">
+                </video>
+                <p class="text-xs text-neutral-500 py-2 text-center">AI-powered outreach in action</p>
+            </div>
+        </div>
+    </header>
+    <div class="aether-badge">AETHER v2.1.0</div>
+
+    <!-- Platform Showcase Section -->
+    <section id="platforms" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+                    Four Platforms. <span class="text-gradient-alt">Infinite Possibilities.</span>
+                </h2>
+                <p class="text-lg text-neutral-400 max-w-2xl mx-auto">
+                    Each platform is powerful on its own. Together, they're unstoppable.
+                </p>
+            </div>
+
+            <!-- Platform Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="platform-cards">
+                <!-- Platform 1: AI Lead Genius -->
+                <div class="glass-card rounded-2xl p-8 group cursor-pointer">
+                    <div class="spotlight"></div>
+                    <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent opacity-0 group-hover:opacity-100 animate-scan"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 icon-blue-cyan rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(14,165,233,0.3)] group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors">AI Lead Genius</h3>
+                        
+                        <p class="text-neutral-400 leading-relaxed mb-6">
+                            Intelligent lead generation that finds, qualifies, and nurtures prospects automatically. 
+                            Transform cold audiences into hot leads with AI-powered scoring and engagement.
+                        </p>
+                        
+                        <div class="space-y-2 mb-6 text-sm">
+                            <div class="flex items-center gap-2 text-cyan-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Automated lead discovery</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-cyan-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>AI-powered qualification</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-cyan-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Smart lead scoring</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-cyan-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Multi-channel outreach</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-3 transition-all">
+                            <span>Learn More</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Platform 2: VideoSite -->
+                <div class="glass-card rounded-2xl p-8 group cursor-pointer">
+                    <div class="spotlight"></div>
+                    <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 to-transparent opacity-0 group-hover:opacity-100 animate-scan"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 icon-blue-purple rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(168,85,247,0.3)] group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">VideoSite</h3>
+                        
+                        <p class="text-neutral-400 leading-relaxed mb-6">
+                            Transform any website into a stunning, cinematic experience with AI-generated videos and 
+                            interactive components. Increase conversions by 3x with movie-like engagement.
+                        </p>
+                        
+                        <div class="space-y-2 mb-6 text-sm">
+                            <div class="flex items-center gap-2 text-purple-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Cinematic transformations</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-purple-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>AI-generated videos</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-purple-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Interactive storytelling</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-purple-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>48-hour delivery</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center gap-2 text-purple-400 font-semibold group-hover:gap-3 transition-all">
+                            <span>See Examples</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Platform 3: SocialSyncs -->
+                <div class="glass-card rounded-2xl p-8 group cursor-pointer">
+                    <div class="spotlight"></div>
+                    <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent opacity-0 group-hover:opacity-100 animate-scan"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 icon-cyan-blue rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(6,182,212,0.3)] group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors">SocialSyncs</h3>
+                        
+                        <p class="text-neutral-400 leading-relaxed mb-6">
+                            Automate your entire social media presence with AI-powered content creation, scheduling, 
+                            and analytics. Maintain consistent brand presence across all platforms.
+                        </p>
+                        
+                        <div class="space-y-2 mb-6 text-sm">
+                            <div class="flex items-center gap-2 text-cyan-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>AI content generation</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-cyan-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Multi-platform scheduling</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-cyan-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Smart posting times</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-cyan-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Performance analytics</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-3 transition-all">
+                            <span>Automate Now</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Platform 4: Tackle -->
+                <div class="glass-card rounded-2xl p-8 group cursor-pointer">
+                    <div class="spotlight"></div>
+                    <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent opacity-0 group-hover:opacity-100 animate-scan"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 icon-indigo-purple rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(99,102,241,0.3)] group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-indigo-200 transition-colors">Tackle</h3>
+                        
+                        <p class="text-neutral-400 leading-relaxed mb-6">
+                            Project management reimagined with AI workflow automation. Assign tasks to AI agents, 
+                            track progress, and ship faster than ever before.
+                        </p>
+                        
+                        <div class="space-y-2 mb-6 text-sm">
+                            <div class="flex items-center gap-2 text-indigo-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>AI task automation</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-indigo-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Smart project planning</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-indigo-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Team collaboration</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-indigo-300">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                <span>Integration ecosystem</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center gap-2 text-indigo-400 font-semibold group-hover:gap-3 transition-all">
+                            <span>Get Started</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    
-    <!-- Platforms Section with Pricing -->
-    <section class="section" id="platforms">
-        <div class="section-header">
-            <h2 class="section-title">Choose Your Platform</h2>
-            <p class="section-subtitle">All platforms included in one subscription, or choose individual tools to fit your needs.</p>
+
+    <!-- Results Metrics Section -->
+    <section class="py-24 px-6 border-y border-blue-900/10 bg-blue-950/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">
+                    Real Results. <span class="text-gradient-alt">Real Impact.</span>
+                </h2>
+                <p class="text-neutral-400 text-lg max-w-2xl mx-auto">
+                    Our AI platforms have helped over 500+ businesses transform their marketing operations
+                </p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="group">
+                        <div class="text-5xl md:text-6xl font-black text-gradient-alt mb-2 animate-pulse-blue">90%</div>
+                        <div class="text-neutral-400 font-medium">Time Savings</div>
+                        <div class="text-xs text-neutral-600 mt-1">Reduce manual work</div>
+                    </div>
+                    <div class="group">
+                        <div class="text-5xl md:text-6xl font-black text-gradient-alt mb-2">3x</div>
+                        <div class="text-neutral-400 font-medium">Conversion Increase</div>
+                        <div class="text-xs text-neutral-600 mt-1">Higher close rates</div>
+                    </div>
+                    <div class="group">
+                        <div class="text-5xl md:text-6xl font-black text-gradient-alt mb-2">48h</div>
+                        <div class="text-neutral-400 font-medium">Setup Time</div>
+                        <div class="text-xs text-neutral-600 mt-1">Launch in 2 days</div>
+                    </div>
+                    <div class="group">
+                        <div class="text-5xl md:text-6xl font-black text-gradient-alt mb-2">$2.4M</div>
+                        <div class="text-neutral-400 font-medium">Revenue Generated</div>
+                        <div class="text-xs text-neutral-600 mt-1">For our clients</div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-purple-900/10"></div>
+        <div class="absolute inset-0 grid-bg opacity-50"></div>
         
-        <div class="platforms-grid" id="pricing">
-            <!-- Platform 1: LeadSite AI -->
-            <div class="platform-card" onclick="showPlatformDetails('leadsite.ai')">
-                <div class="platform-icon">🎯</div>
-                <h3 class="platform-title">LeadSite AI</h3>
-                <p class="platform-description">AI-powered lead scoring and enrichment with 92% accuracy. Identify hot leads instantly.</p>
-                <div class="platform-price">
-                    <span class="amount">$97</span>
-                    <span class="period">/month</span>
-                </div>
-                <ul class="platform-features">
-                    <li>AI Lead Scoring</li>
-                    <li>Data Enrichment</li>
-                    <li>CRM Integration</li>
-                    <li>Priority Alerts</li>
-                </ul>
-                <button class="platform-btn">Get Started</button>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to Transform<br/>
+                <span class="text-gradient-alt">Your Marketing?</span>
+            </h2>
+            <p class="text-xl text-neutral-400 mb-10 max-w-2xl mx-auto">
+                Join 500+ teams already using AI Lead Strategies to automate, optimize, and accelerate their growth.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <button class="glow-button px-10 py-4 text-white font-semibold rounded-xl inline-flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <span>Get Started Free</span>
+                </button>
+                <button class="glass-card px-10 py-4 text-white font-semibold rounded-xl hover:bg-white/5 transition-all inline-flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Schedule Demo</span>
+                </button>
             </div>
-            
-            <!-- Platform 2: LeadSite IO -->
-            <div class="platform-card" onclick="showPlatformDetails('leadsite.io')">
-                <div class="platform-icon">🏗️</div>
-                <h3 class="platform-title">LeadSite IO</h3>
-                <p class="platform-description">AI website builder that creates high-converting lead-capture sites in under 3 minutes.</p>
-                <div class="platform-price">
-                    <span class="amount">$67</span>
-                    <span class="period">/month</span>
-                </div>
-                <ul class="platform-features">
-                    <li>AI Site Builder</li>
-                    <li>100+ Templates</li>
-                    <li>Form Builder</li>
-                    <li>Analytics Dashboard</li>
-                </ul>
-                <button class="platform-btn">Get Started</button>
-            </div>
-            
-            <!-- Platform 3: ClientContact AI (Featured) -->
-            <div class="platform-card featured" onclick="showPlatformDetails('clientcontact.ai')">
-                <span class="featured-badge">Most Popular</span>
-                <div class="platform-icon">📬</div>
-                <h3 class="platform-title">ClientContact AI</h3>
-                <p class="platform-description">Unified inbox for 22+ channels with AI auto-responder. Never miss a lead again.</p>
-                <div class="platform-price">
-                    <span class="amount">$147</span>
-                    <span class="period">/month</span>
-                </div>
-                <ul class="platform-features">
-                    <li>22+ Channel Inbox</li>
-                    <li>AI Auto-Responder</li>
-                    <li>Smart Routing</li>
-                    <li>Team Collaboration</li>
-                </ul>
-                <button class="platform-btn">Get Started</button>
-            </div>
-            
-            <!-- Platform 4: VideoSite AI -->
-            <div class="platform-card" onclick="showPlatformDetails('videosite.ai')">
-                <div class="platform-icon">🎬</div>
-                <h3 class="platform-title">VideoSite AI</h3>
-                <p class="platform-description">AI-powered video marketing with 87% higher engagement. Create viral content.</p>
-                <div class="platform-price">
-                    <span class="amount">$127</span>
-                    <span class="period">/month</span>
-                </div>
-                <ul class="platform-features">
-                    <li>AI Video Creation</li>
-                    <li>Auto-Captions</li>
-                    <li>Thumbnail Generator</li>
-                    <li>Multi-Platform Upload</li>
-                </ul>
-                <button class="platform-btn">Get Started</button>
-            </div>
-            
-            <!-- Platform 5: All-In-One Bundle -->
-            <div class="platform-card" onclick="showPlatformDetails('bundle')">
-                <div class="platform-icon">⚡</div>
-                <h3 class="platform-title">All-In-One Bundle</h3>
-                <p class="platform-description">Get all 4 platforms plus exclusive features at 60% off. Best value for agencies.</p>
-                <div class="platform-price">
-                    <span class="amount">$197</span>
-                    <span class="period">/month</span>
-                </div>
-                <ul class="platform-features">
-                    <li>All 4 Platforms</li>
-                    <li>Priority Support</li>
-                    <li>White Label Options</li>
-                    <li>API Access</li>
-                </ul>
-                <button class="platform-btn">Get Started</button>
-            </div>
+            <p class="text-sm text-neutral-500">No credit card required • 14-day free trial • Setup in minutes</p>
         </div>
     </section>
-    
-    <!-- Auth Section -->
-    <section class="section">
-        <div class="section-header">
-            <h2 class="section-title">Get Started Today</h2>
-            <p class="section-subtitle">14-day free trial. No credit card required.</p>
-        </div>
-        
-        <div id="user-profile" class="user-profile">
-            <button class="logout-btn" onclick="logout()">Logout</button>
-            <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">Welcome, <span id="user-name"></span>!</h3>
-            <p style="color: var(--text-secondary);">Email: <span id="user-email"></span></p>
-            <div id="api-status" class="status-badge" style="margin-top: 1rem;">Checking API...</div>
-        </div>
-        
-        <div class="auth-section" id="auth-section">
-            <div class="auth-tabs">
-                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
-                <button class="tab-btn" onclick="switchTab('register')">Register</button>
-            </div>
-            
-            <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" required placeholder="your@email.com">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" required placeholder="Enter password">
-                </div>
-                <button type="submit" class="btn">Login</button>
-                <div class="divider"><span>OR</span></div>
-                <div id="google-login-btn" class="google-btn-container"></div>
-            </form>
-            
-            <form id="register-form" class="auth-form" onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" required placeholder="Your name">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" required placeholder="your@email.com">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" required placeholder="Create password">
-                </div>
-                <button type="submit" class="btn">Start Free Trial</button>
-                <div class="divider"><span>OR</span></div>
-                <div id="google-register-btn" class="google-btn-container"></div>
-            </form>
-            
-            <div id="auth-message"></div>
-        </div>
-    </section>
-    
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonials">
-        <div class="testimonials-inner">
-            <div class="section-header">
-                <h2 class="section-title">What Our Users Say</h2>
-                <p class="section-subtitle">Join thousands of businesses scaling with AI Lead Strategies.</p>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p>"The lead scoring accuracy is incredible. We've cut our sales cycle in half and only talk to qualified prospects now."</p>
-                    <span class="author">— Sarah M., VP of Sales, B2B SaaS</span>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p>"ClientContact AI replaced 3 tools we were paying for separately. One inbox for everything changed our workflow."</p>
-                    <span class="author">— Marcus T., Operations Lead, Marketing Agency</span>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">★★★★★</div>
-                    <p>"Built our entire lead capture funnel in 20 minutes. The AI suggestions for copy were spot-on."</p>
-                    <span class="author">— Jennifer K., Founder, E-commerce Brand</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    
+
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div>
-                <div class="footer-brand">AI Lead Strategies</div>
-                <p style="font-size: 0.9rem;">The future of outreach marketing.</p>
+    <footer class="border-t border-blue-900/10 bg-[#010205] pt-16 pb-8 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">AI</span>
+                        </div>
+                        <div>
+                            <div class="text-white font-semibold text-sm">AI Lead Strategies</div>
+                            <div class="text-blue-400/70 text-xs">Marketing Intelligence</div>
+                        </div>
+                    </div>
+                    <p class="text-neutral-500 text-sm max-w-xs">
+                        Four powerful AI platforms transforming the future of marketing and lead generation.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Platforms</h4>
+                    <ul class="space-y-2 text-sm text-neutral-500">
+                        <li><a href="/leadsite-ai" class="hover:text-blue-400 transition-colors">LeadSite.AI</a></li>
+                        <li><a href="/leadsite-io" class="hover:text-blue-400 transition-colors">LeadSite.IO</a></li>
+                        <li><a href="/clientcontact-io" class="hover:text-blue-400 transition-colors">ClientContact</a></li>
+                        <li><a href="/tackle-io" class="hover:text-blue-400 transition-colors">Tackle</a></li>
+                        <li><a href="/videosite-ai" class="hover:text-blue-400 transition-colors">VideoSite</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm text-neutral-500">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">For Agencies</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">For E-commerce</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">For B2B Sales</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">White Label</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-neutral-500">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="#platforms">Platforms</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#testimonials">Reviews</a>
-                <a href="/forgot-password.html">Forgot Password</a>
-                <a href="/dashboard.html">Dashboard</a>
+            
+            <div class="border-t border-blue-900/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-neutral-600 text-xs">© 2024 AI Lead Strategies. All rights reserved.</p>
+                <div class="flex items-center gap-2 text-xs text-neutral-600">
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                    <span>All systems operational</span>
+                </div>
             </div>
         </div>
-        <p class="footer-copy">© 2026 AI Lead Strategies. All rights reserved. | One Platform. Infinite Revenue.</p>
     </footer>
-    
+
     <script>
-        const API_URL = 'https://backend-production-2987.up.railway.app';
-        const GOOGLE_CLIENT_ID = '1022885462325-705kc6vuv96f828iegacs6p8csjr09dk.apps.googleusercontent.com';
-        let currentUser = null;
-        let authToken = localStorage.getItem('authToken');
+        // Spotlight Effect Script
+        const platformCards = document.getElementById('platform-cards');
+        const cards = platformCards.querySelectorAll('.glass-card');
         
-        function initializeGoogleSignIn() {
-            const maxRetries = 10;
-            const retryDelayMs = 300;
-            function tryRender() {
-                if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-                    const loginContainer = document.getElementById('google-login-btn');
-                    if (loginContainer && loginContainer.children.length === 0) {
-                        google.accounts.id.initialize({
-                            client_id: GOOGLE_CLIENT_ID,
-                            callback: handleGoogleAuth
-                        });
-                        google.accounts.id.renderButton(loginContainer, {
-                            type: 'standard',
-                            theme: 'filled_black',
-                            size: 'large',
-                            text: 'signin_with',
-                            shape: 'rectangular',
-                            logo_alignment: 'left',
-                            width: loginContainer.offsetWidth || 320
-                        });
-                    }
-                    const registerContainer = document.getElementById('google-register-btn');
-                    if (registerContainer && registerContainer.children.length === 0) {
-                        google.accounts.id.renderButton(registerContainer, {
-                            type: 'standard',
-                            theme: 'filled_black',
-                            size: 'large',
-                            text: 'continue_with',
-                            shape: 'rectangular',
-                            logo_alignment: 'left',
-                            width: registerContainer.offsetWidth || 320
-                        });
-                    }
-                    return true;
+        platformCards.addEventListener('mousemove', (e) => {
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-                return false;
-            }
-            function attempt(n) {
-                if (tryRender()) return;
-                if (n >= maxRetries) { console.warn('Google Sign-In: API not available after retries.'); return; }
-                setTimeout(function() { attempt(n + 1); }, retryDelayMs);
-            }
-            attempt(0);
-        }
-        
-        async function checkAPIStatus() {
-            const statusEl = document.getElementById('api-status');
-            if (!statusEl) return;
-            try {
-                const response = await fetch(`${API_URL}/health`);
-                const data = await response.json();
-                statusEl.textContent = '✅ API Connected';
-                statusEl.style.background = '#10b981';
-            } catch (error) {
-                statusEl.textContent = '❌ API Offline';
-                statusEl.style.background = '#ef4444';
-            }
-        }
-        
-        function switchTab(tab) {
-            const tabs = document.querySelectorAll('.tab-btn');
-            const forms = document.querySelectorAll('.auth-form');
-            tabs.forEach(t => t.classList.remove('active'));
-            forms.forEach(f => f.classList.remove('active'));
-            if (tab === 'login') {
-                tabs[0].classList.add('active');
-                document.getElementById('login-form').classList.add('active');
-            } else {
-                tabs[1].classList.add('active');
-                document.getElementById('register-form').classList.add('active');
-            }
-        }
-        
-        async function handleLogin(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            try {
-                const response = await fetch(`${API_URL}/api/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
-                if (response.ok) {
-                    authToken = result.token;
-                    localStorage.setItem('authToken', authToken);
-                    currentUser = result.user;
-                    showMessage(`Login successful! ${result.user.trial_days_remaining} days of trial remaining.`, 'success');
-                    updateUIForLoggedInUser();
-                } else {
-                    showMessage(result.error || 'Login failed', 'error');
-                }
-            } catch (error) {
-                showMessage('Connection error. Please try again.', 'error');
-            }
-        }
-        
-        async function handleRegister(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            try {
-                const response = await fetch(`${API_URL}/api/auth/register`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
-                if (response.ok) {
-                    authToken = result.token;
-                    localStorage.setItem('authToken', authToken);
-                    currentUser = result.user;
-                    showMessage(`Registration successful! You have ${result.user.trial_days_remaining} days of free trial.`, 'success');
-                    updateUIForLoggedInUser();
-                } else {
-                    showMessage(result.error || 'Registration failed', 'error');
-                }
-            } catch (error) {
-                showMessage('Connection error. Please try again.', 'error');
-            }
-        }
-        
-        async function handleGoogleAuth(response) {
-            try {
-                const result = await fetch(`${API_URL}/api/auth/google`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ credential: response.credential })
-                });
-                const data = await result.json();
-                if (result.ok) {
-                    authToken = data.token;
-                    localStorage.setItem('authToken', authToken);
-                    currentUser = data.user;
-                    showMessage(`Welcome ${data.user.name}! ${data.user.trial_days_remaining} days of trial remaining.`, 'success');
-                    updateUIForLoggedInUser();
-                } else {
-                    showMessage('Google sign-in failed: ' + (data.error || 'Unknown error'), 'error');
-                }
-            } catch (error) {
-                console.error('Google auth error:', error);
-                showMessage('Google sign-in failed. Please try again.', 'error');
-            }
-        }
-        
-        function updateUIForLoggedInUser() {
-            document.getElementById('auth-section').style.display = 'none';
-            document.getElementById('user-profile').classList.add('active');
-            document.getElementById('user-name').textContent = currentUser.name;
-            document.getElementById('user-email').textContent = currentUser.email;
-            checkAPIStatus();
-            if (!document.getElementById('dashboard-btn')) {
-                const profileDiv = document.getElementById('user-profile');
-                const dashboardBtn = document.createElement('button');
-                dashboardBtn.id = 'dashboard-btn';
-                dashboardBtn.className = 'btn';
-                dashboardBtn.textContent = '🚀 Go to Dashboard';
-                dashboardBtn.style.marginTop = '15px';
-                dashboardBtn.onclick = () => window.location.href = '/dashboard.html';
-                profileDiv.appendChild(dashboardBtn);
-            }
-        }
-        
-        function logout() {
-            localStorage.removeItem('authToken');
-            authToken = null;
-            currentUser = null;
-            document.getElementById('auth-section').style.display = 'block';
-            document.getElementById('user-profile').classList.remove('active');
-            showMessage('Logged out successfully', 'success');
-        }
-        
-        function showPlatformDetails(platform) {
-            if (!authToken) {
-                showMessage('Please login to access platform features', 'error');
-                document.getElementById('auth-section').scrollIntoView({behavior:'smooth'});
-                return;
-            }
-            window.location.href = `/dashboard.html?domain=${platform}`;
-        }
-        
-        function showMessage(message, type) {
-            const messageDiv = document.getElementById('auth-message');
-            messageDiv.className = `message ${type}`;
-            messageDiv.textContent = message;
-            setTimeout(() => {
-                messageDiv.className = '';
-                messageDiv.textContent = '';
-            }, 5000);
-        }
-        
-        async function checkExistingAuth() {
-            if (authToken) {
-                try {
-                    const response = await fetch(`${API_URL}/api/auth/me`, {
-                        headers: { 'Authorization': `Bearer ${authToken}` }
-                    });
-                    if (response.ok) {
-                        const data = await response.json();
-                        currentUser = data.user;
-                        updateUIForLoggedInUser();
-                    } else {
-                        localStorage.removeItem('authToken');
-                        authToken = null;
-                    }
-                } catch (error) {
-                    console.error('Auth check failed:', error);
-                }
-            }
-        }
-        
-        checkAPIStatus();
-        checkExistingAuth();
-        initializeGoogleSignIn();
-        setInterval(checkAPIStatus, 30000);
+            });
+        });
     </script>
+
 </body>
 </html>
