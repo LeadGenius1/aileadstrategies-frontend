@@ -1,27 +1,31 @@
 <!DOCTYPE html>
+<!-- AETHER UI v2.0.0 - Build: 20260130-0300 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>AI Lead Strategies - ONE PLATFORM INFINITE REVENUE</title>
+    <!-- AETHER UI - Force deployment update -->
     <!-- Google Sign-In -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         :root {
             --primary-color: #00d4ff;
-            --primary-glow: rgba(0, 212, 255, 0.3);
             --secondary-color: #7c3aed;
             --accent-color: #f59e0b;
             --success-color: #10b981;
             --warning-color: #f59e0b;
             --error-color: #ef4444;
-            --bg-dark: #0a0a0f;
-            --bg-card: #12121a;
-            --bg-card-hover: #1a1a25;
-            --border-color: rgba(255, 255, 255, 0.1);
+            --dark-bg: #0a0a0f;
+            --dark-card: #12121a;
+            --dark-border: #1f1f2e;
             --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
+            --text-secondary: #94a3b8;
+            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #f59e0b 100%);
+            --gradient-card: linear-gradient(145deg, #12121a 0%, #1a1a2e 100%);
         }
         
         * {
@@ -32,17 +36,32 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--bg-dark);
+            background: var(--dark-bg);
             min-height: 100vh;
             color: var(--text-primary);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        /* Navbar - AETHER Dark Style */
+        /* Animated background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Navbar - AETHER Dark */
         .navbar {
             background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--dark-border);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -55,13 +74,18 @@
         .navbar-brand {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+        
+        .navbar-brand::before {
+            content: '◆';
+            -webkit-text-fill-color: var(--primary-color);
         }
         
         .navbar-links {
@@ -74,11 +98,27 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: all 0.3s;
+            position: relative;
         }
         
         .navbar-links a:hover {
             color: var(--primary-color);
+        }
+        
+        .navbar-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s;
+        }
+        
+        .navbar-links a:hover::after {
+            width: 100%;
         }
         
         .navbar-cta {
@@ -87,8 +127,8 @@
         }
         
         .btn-nav {
-            padding: 0.5rem 1.25rem;
-            border-radius: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
@@ -105,26 +145,26 @@
         
         .btn-nav.outline:hover {
             background: var(--primary-color);
-            color: var(--bg-dark);
-            box-shadow: 0 0 20px var(--primary-glow);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
         }
         
         .btn-nav.primary {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            font-weight: 700;
         }
         
         .btn-nav.primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 30px var(--primary-glow);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
         }
         
-        /* Hero Section - AETHER Dark Theme */
+        /* Hero Section - AETHER Dark */
         .hero {
-            background: linear-gradient(180deg, var(--bg-dark) 0%, #0f0f1a 100%);
-            padding: 6rem 2rem;
-            text-align: center;
             position: relative;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
             overflow: hidden;
         }
         
@@ -136,8 +176,7 @@
             transform: translateX(-50%);
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
-            opacity: 0.3;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, rgba(124, 58, 237, 0.1) 40%, transparent 70%);
             pointer-events: none;
         }
         
@@ -148,24 +187,24 @@
             z-index: 1;
         }
         
-        .hero-label {
+        .hero-badge {
             display: inline-block;
-            padding: 0.5rem 1rem;
             background: rgba(0, 212, 255, 0.1);
             border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 2rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
             font-size: 0.875rem;
             color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
         }
         
         .hero h1 {
             font-size: 4rem;
-            font-weight: 800;
+            font-weight: 900;
             margin-bottom: 0.5rem;
             line-height: 1.1;
-            background: linear-gradient(135deg, #ffffff 0%, var(--primary-color) 50%, var(--secondary-color) 100%);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -173,37 +212,49 @@
             letter-spacing: -1px;
         }
         
-        .hero .tagline {
+        .hero h2 {
             font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        
+        .hero .tagline {
+            font-size: 1.25rem;
             color: var(--text-secondary);
             margin-bottom: 2.5rem;
-            line-height: 1.4;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .hero-stats {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 3rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
+            margin-bottom: 3rem;
         }
         
         .hero-stat {
             text-align: center;
         }
         
-        .hero-stat-value {
+        .hero-stat .number {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--primary-color);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .hero-stat-label {
+        .hero-stat .label {
             font-size: 0.875rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -217,29 +268,31 @@
         
         .btn-hero {
             padding: 1rem 2.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
             border: none;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .btn-hero.primary {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
         }
         
         .btn-hero.primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 40px var(--primary-glow);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
         }
         
         .btn-hero.secondary {
             background: transparent;
             color: var(--text-primary);
-            border: 2px solid var(--border-color);
+            border: 2px solid var(--dark-border);
         }
         
         .btn-hero.secondary:hover {
@@ -247,23 +300,25 @@
             color: var(--primary-color);
         }
         
-        /* Platforms Section - 5 Cards with Pricing */
-        .platforms-section {
-            padding: 5rem 2rem;
-            background: var(--bg-dark);
+        /* Platform Cards Section */
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         .section-header {
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto 3rem;
+            margin-bottom: 3rem;
         }
         
         .section-title {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 0%, var(--primary-color) 100%);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -272,22 +327,24 @@
         .section-subtitle {
             color: var(--text-secondary);
             font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
+        /* Platform Cards Grid - 5 Cards */
         .platforms-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            margin-bottom: 3rem;
         }
         
         .platform-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
+            background: var(--gradient-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
             padding: 2rem;
-            transition: all 0.3s;
+            transition: all 0.4s;
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -300,15 +357,15 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-primary);
             opacity: 0;
             transition: opacity 0.3s;
         }
         
         .platform-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px var(--primary-glow);
+            transform: translateY(-8px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         
         .platform-card:hover::before {
@@ -316,11 +373,10 @@
         }
         
         .platform-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(124, 58, 237, 0.2));
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
             margin-bottom: 1.25rem;
             display: flex;
             align-items: center;
@@ -329,17 +385,17 @@
         }
         
         .platform-title {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
-            font-weight: 600;
+            font-weight: 700;
         }
         
         .platform-description {
             color: var(--text-secondary);
-            font-size: 0.9375rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
             margin-bottom: 1.5rem;
-            line-height: 1.5;
         }
         
         .platform-price {
@@ -349,27 +405,26 @@
             margin-bottom: 1rem;
         }
         
-        .price-amount {
+        .platform-price .amount {
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary-color);
         }
         
-        .price-period {
-            color: var(--text-muted);
+        .platform-price .period {
             font-size: 0.875rem;
+            color: var(--text-secondary);
         }
         
         .platform-features {
             list-style: none;
-            padding: 0;
-            margin: 0;
+            margin-bottom: 1.5rem;
         }
         
         .platform-features li {
+            padding: 0.4rem 0;
             color: var(--text-secondary);
-            font-size: 0.875rem;
-            padding: 0.375rem 0;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -381,88 +436,70 @@
             font-weight: bold;
         }
         
-        .platform-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: linear-gradient(135deg, var(--accent-color), #dc2626);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
+        .platform-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: transparent;
+            border: 2px solid var(--dark-border);
+            border-radius: 8px;
+            color: var(--text-primary);
             font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        /* Features Section */
-        .features-section {
-            padding: 5rem 2rem;
-            background: linear-gradient(180deg, #0f0f1a 0%, var(--bg-dark) 100%);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
-            padding: 2rem;
+            cursor: pointer;
             transition: all 0.3s;
         }
         
-        .feature-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
+        .platform-btn:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: var(--dark-bg);
         }
         
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.25rem;
+        /* Featured Platform */
+        .platform-card.featured {
+            border-color: var(--primary-color);
+            transform: scale(1.02);
         }
         
-        .feature-card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
+        .platform-card.featured::before {
+            opacity: 1;
         }
         
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            line-height: 1.5;
+        .platform-card.featured .platform-btn {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: var(--dark-bg);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
         
         /* Auth Section */
         .auth-section {
-            padding: 5rem 2rem;
-            background: var(--bg-dark);
-        }
-        
-        .auth-container {
-            max-width: 480px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
             padding: 2.5rem;
+            max-width: 480px;
+            margin: 0 auto 3rem;
         }
         
         .auth-tabs {
             display: flex;
             gap: 0.5rem;
             margin-bottom: 2rem;
+            background: var(--dark-bg);
+            padding: 0.25rem;
+            border-radius: 10px;
         }
         
         .tab-btn {
@@ -470,18 +507,16 @@
             padding: 0.875rem 1.5rem;
             border: none;
             background: transparent;
-            border-radius: 0.5rem;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 600;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
         }
         
         .tab-btn.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-color: transparent;
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
         }
         
         .auth-form {
@@ -507,32 +542,32 @@
         .form-group input {
             width: 100%;
             padding: 0.875rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
+            background: var(--dark-bg);
+            border: 1px solid var(--dark-border);
+            border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s;
-            background: var(--bg-dark);
             color: var(--text-primary);
+            transition: all 0.3s;
         }
         
         .form-group input:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px var(--primary-glow);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
         }
         
         .form-group input::placeholder {
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
         
         .btn {
             padding: 0.875rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 8px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             width: 100%;
@@ -540,7 +575,7 @@
         
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px var(--primary-glow);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
         }
         
         .divider {
@@ -548,7 +583,7 @@
             align-items: center;
             text-align: center;
             margin: 1.5rem 0;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.875rem;
         }
         
@@ -556,7 +591,7 @@
         .divider::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--dark-border);
         }
         
         .divider span {
@@ -570,46 +605,35 @@
         
         .message {
             padding: 0.875rem 1rem;
-            border-radius: 0.5rem;
+            border-radius: 8px;
             margin-top: 1rem;
             font-size: 0.9375rem;
         }
         
         .message.success {
-            background: rgba(16, 185, 129, 0.15);
+            background: rgba(16, 185, 129, 0.1);
             color: var(--success-color);
             border: 1px solid rgba(16, 185, 129, 0.3);
         }
         
         .message.error {
-            background: rgba(239, 68, 68, 0.15);
+            background: rgba(239, 68, 68, 0.1);
             color: var(--error-color);
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
         
         .user-profile {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
             padding: 2rem;
-            margin-bottom: 2rem;
-            display: none;
             max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 3rem;
+            display: none;
         }
         
         .user-profile.active {
             display: block;
-        }
-        
-        .user-profile h3 {
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .user-profile p {
-            color: var(--text-secondary);
         }
         
         .logout-btn {
@@ -617,36 +641,43 @@
             padding: 0.5rem 1.25rem;
             color: white;
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 8px;
             cursor: pointer;
             float: right;
-            font-weight: 500;
-            transition: opacity 0.2s;
+            font-weight: 600;
+            transition: all 0.3s;
         }
         
         .logout-btn:hover {
             opacity: 0.9;
+            transform: translateY(-1px);
         }
         
         /* Testimonials */
-        .testimonials-section {
-            padding: 5rem 2rem;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, #0f0f1a 100%);
+        .testimonials {
+            background: var(--dark-card);
+            border-top: 1px solid var(--dark-border);
+            border-bottom: 1px solid var(--dark-border);
+            padding: 4rem 2rem;
+        }
+        
+        .testimonials-inner {
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin-top: 2.5rem;
         }
         
         .testimonial-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 1rem;
+            background: var(--dark-bg);
+            padding: 1.75rem;
+            border-radius: 12px;
+            border: 1px solid var(--dark-border);
         }
         
         .testimonial-card p {
@@ -656,50 +687,22 @@
             line-height: 1.6;
         }
         
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-        }
-        
-        .testimonial-info .name {
+        .testimonial-card .author {
             font-weight: 600;
             color: var(--text-primary);
+            font-size: 0.9375rem;
         }
         
-        .testimonial-info .role {
-            font-size: 0.875rem;
-            color: var(--text-muted);
+        .testimonial-rating {
+            color: var(--accent-color);
+            margin-bottom: 0.75rem;
         }
         
-        /* API Status */
-        .status-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            background: var(--success-color);
-            color: white;
-            border-radius: 2rem;
-            font-size: 0.8125rem;
-            font-weight: 500;
-        }
-        
-        /* Footer - AETHER Dark */
+        /* Footer */
         .footer {
-            background: #050508;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
+            background: var(--dark-bg);
+            border-top: 1px solid var(--dark-border);
+            color: var(--text-secondary);
             padding: 3rem 2rem;
         }
         
@@ -713,9 +716,9 @@
         }
         
         .footer-brand {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -724,14 +727,14 @@
         
         .footer-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
         }
         
         .footer-links a {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9375rem;
-            transition: color 0.2s;
+            transition: color 0.3s;
         }
         
         .footer-links a:hover {
@@ -742,206 +745,203 @@
             font-size: 0.875rem;
             margin-top: 1rem;
             width: 100%;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--dark-border);
         }
         
+        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            .hero .tagline { font-size: 1.1rem; letter-spacing: 1px; }
+            .hero h2 { font-size: 1rem; letter-spacing: 2px; }
+            .hero .tagline { font-size: 1rem; }
             .navbar-links { display: none; }
             .hero-stats { gap: 1.5rem; }
-            .hero-stat-value { font-size: 2rem; }
+            .hero-stat .number { font-size: 2rem; }
+            .platforms-grid { grid-template-columns: 1fr; }
+            .platform-card.featured { transform: none; }
+        }
+        
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            background: var(--success-color);
+            color: white;
+            border-radius: 2rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
+    <div class="bg-grid"></div>
+    
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="navbar-brand">⚡ AETHER</div>
+        <div class="navbar-brand">AI Lead Strategies</div>
         <div class="navbar-links">
             <a href="#platforms">Platforms</a>
-            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#testimonials">Reviews</a>
             <a href="#auth-section">Sign In</a>
         </div>
         <div class="navbar-cta">
             <button class="btn-nav outline" onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'}); switchTab('login');">Log In</button>
-            <button class="btn-nav primary" onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'}); switchTab('register');">Get Started</button>
+            <button class="btn-nav primary" onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'}); switchTab('register');">Start Free</button>
         </div>
     </nav>
     
     <!-- Hero -->
     <section class="hero">
         <div class="hero-inner">
-            <span class="hero-label">AI-Powered Marketing Suite</span>
+            <span class="hero-badge">🚀 Now with AI-Powered Automation</span>
             <h1>ONE PLATFORM<br>INFINITE REVENUE</h1>
-            <p class="tagline">THE FUTURE OF OUTREACH MARKETING</p>
+            <h2>THE FUTURE OF OUTREACH MARKETING</h2>
+            <p class="tagline">Unify lead generation, AI scoring, automated outreach, and video marketing in one powerful platform. Scale your revenue without scaling your team.</p>
+            
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <div class="hero-stat-value">92%</div>
-                    <div class="hero-stat-label">Lead Accuracy</div>
+                    <div class="number">92%</div>
+                    <div class="label">Lead Accuracy</div>
                 </div>
                 <div class="hero-stat">
-                    <div class="hero-stat-value">5x</div>
-                    <div class="hero-stat-label">ROI Increase</div>
+                    <div class="number">10x</div>
+                    <div class="label">ROI Average</div>
                 </div>
                 <div class="hero-stat">
-                    <div class="hero-stat-value">22+</div>
-                    <div class="hero-stat-label">Channels</div>
+                    <div class="number">22+</div>
+                    <div class="label">Channels</div>
                 </div>
                 <div class="hero-stat">
-                    <div class="hero-stat-value">10K+</div>
-                    <div class="hero-stat-label">Active Users</div>
+                    <div class="number">3 min</div>
+                    <div class="label">Site Build</div>
                 </div>
             </div>
+            
             <div class="hero-cta">
-                <a href="#auth-section" class="btn-hero primary" onclick="switchTab('register'); return true;">Start Free Trial</a>
-                <a href="#platforms" class="btn-hero secondary">View Pricing</a>
+                <a href="#auth-section" class="btn-hero primary" onclick="switchTab('register'); return true;">Start 14-Day Free Trial</a>
+                <a href="#platforms" class="btn-hero secondary">View All Platforms</a>
             </div>
         </div>
     </section>
     
-    <!-- Platforms Section - 5 Cards with Pricing -->
-    <section class="platforms-section" id="platforms">
+    <!-- Platforms Section with Pricing -->
+    <section class="section" id="platforms">
         <div class="section-header">
             <h2 class="section-title">Choose Your Platform</h2>
-            <p class="section-subtitle">Five powerful AI tools, one unified ecosystem. Scale your outreach with precision.</p>
+            <p class="section-subtitle">All platforms included in one subscription, or choose individual tools to fit your needs.</p>
         </div>
         
-        <div class="platforms-grid">
+        <div class="platforms-grid" id="pricing">
             <!-- Platform 1: LeadSite AI -->
             <div class="platform-card" onclick="showPlatformDetails('leadsite.ai')">
-                <span class="platform-badge">Most Popular</span>
                 <div class="platform-icon">🎯</div>
                 <h3 class="platform-title">LeadSite AI</h3>
-                <p class="platform-description">AI-powered lead scoring and enrichment with 92% accuracy. Turn data into qualified opportunities.</p>
+                <p class="platform-description">AI-powered lead scoring and enrichment with 92% accuracy. Identify hot leads instantly.</p>
                 <div class="platform-price">
-                    <span class="price-amount">$49</span>
-                    <span class="price-period">/month</span>
+                    <span class="amount">$97</span>
+                    <span class="period">/month</span>
                 </div>
                 <ul class="platform-features">
                     <li>AI Lead Scoring</li>
-                    <li>Contact Enrichment</li>
+                    <li>Data Enrichment</li>
                     <li>CRM Integration</li>
-                    <li>Unlimited Searches</li>
+                    <li>Priority Alerts</li>
                 </ul>
+                <button class="platform-btn">Get Started</button>
             </div>
             
             <!-- Platform 2: LeadSite IO -->
             <div class="platform-card" onclick="showPlatformDetails('leadsite.io')">
                 <div class="platform-icon">🏗️</div>
                 <h3 class="platform-title">LeadSite IO</h3>
-                <p class="platform-description">AI website builder that creates lead-capture sites in 3 minutes. No coding required.</p>
+                <p class="platform-description">AI website builder that creates high-converting lead-capture sites in under 3 minutes.</p>
                 <div class="platform-price">
-                    <span class="price-amount">$29</span>
-                    <span class="price-period">/month</span>
+                    <span class="amount">$67</span>
+                    <span class="period">/month</span>
                 </div>
                 <ul class="platform-features">
-                    <li>Drag & Drop Builder</li>
-                    <li>AI Content Generation</li>
-                    <li>Custom Domains</li>
+                    <li>AI Site Builder</li>
+                    <li>100+ Templates</li>
+                    <li>Form Builder</li>
                     <li>Analytics Dashboard</li>
                 </ul>
+                <button class="platform-btn">Get Started</button>
             </div>
             
-            <!-- Platform 3: ClientContact AI -->
-            <div class="platform-card" onclick="showPlatformDetails('clientcontact.ai')">
+            <!-- Platform 3: ClientContact AI (Featured) -->
+            <div class="platform-card featured" onclick="showPlatformDetails('clientcontact.ai')">
+                <span class="featured-badge">Most Popular</span>
                 <div class="platform-icon">📬</div>
                 <h3 class="platform-title">ClientContact AI</h3>
                 <p class="platform-description">Unified inbox for 22+ channels with AI auto-responder. Never miss a lead again.</p>
                 <div class="platform-price">
-                    <span class="price-amount">$79</span>
-                    <span class="price-period">/month</span>
+                    <span class="amount">$147</span>
+                    <span class="period">/month</span>
                 </div>
                 <ul class="platform-features">
-                    <li>22+ Channel Support</li>
+                    <li>22+ Channel Inbox</li>
                     <li>AI Auto-Responder</li>
-                    <li>Conversation Analytics</li>
+                    <li>Smart Routing</li>
                     <li>Team Collaboration</li>
                 </ul>
+                <button class="platform-btn">Get Started</button>
             </div>
             
             <!-- Platform 4: VideoSite AI -->
             <div class="platform-card" onclick="showPlatformDetails('videosite.ai')">
                 <div class="platform-icon">🎬</div>
                 <h3 class="platform-title">VideoSite AI</h3>
-                <p class="platform-description">AI-powered video marketing with 87% higher engagement. Create, host, and convert.</p>
+                <p class="platform-description">AI-powered video marketing with 87% higher engagement. Create viral content.</p>
                 <div class="platform-price">
-                    <span class="price-amount">$59</span>
-                    <span class="price-period">/month</span>
+                    <span class="amount">$127</span>
+                    <span class="period">/month</span>
                 </div>
                 <ul class="platform-features">
-                    <li>AI Video Generation</li>
-                    <li>Personalization Engine</li>
-                    <li>Video Analytics</li>
-                    <li>Embed Anywhere</li>
+                    <li>AI Video Creation</li>
+                    <li>Auto-Captions</li>
+                    <li>Thumbnail Generator</li>
+                    <li>Multi-Platform Upload</li>
                 </ul>
+                <button class="platform-btn">Get Started</button>
             </div>
             
-            <!-- Platform 5: OutreachPro AI -->
-            <div class="platform-card" onclick="showPlatformDetails('outreachpro.ai')">
-                <span class="platform-badge">New</span>
-                <div class="platform-icon">🚀</div>
-                <h3 class="platform-title">OutreachPro AI</h3>
-                <p class="platform-description">Automated multi-channel outreach campaigns. Email, LinkedIn, and SMS at scale.</p>
+            <!-- Platform 5: All-In-One Bundle -->
+            <div class="platform-card" onclick="showPlatformDetails('bundle')">
+                <div class="platform-icon">⚡</div>
+                <h3 class="platform-title">All-In-One Bundle</h3>
+                <p class="platform-description">Get all 4 platforms plus exclusive features at 60% off. Best value for agencies.</p>
                 <div class="platform-price">
-                    <span class="price-amount">$99</span>
-                    <span class="price-period">/month</span>
+                    <span class="amount">$197</span>
+                    <span class="period">/month</span>
                 </div>
                 <ul class="platform-features">
-                    <li>Multi-Channel Sequences</li>
-                    <li>AI Personalization</li>
-                    <li>A/B Testing</li>
-                    <li>Deliverability Suite</li>
+                    <li>All 4 Platforms</li>
+                    <li>Priority Support</li>
+                    <li>White Label Options</li>
+                    <li>API Access</li>
                 </ul>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="section-header">
-            <h2 class="section-title">Why AETHER</h2>
-            <p class="section-subtitle">Enterprise-grade AI tools built for modern marketing teams.</p>
-        </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightning Fast</h3>
-                <p>Deploy campaigns in minutes, not days. Our AI handles the heavy lifting so you can focus on strategy.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Enterprise Security</h3>
-                <p>SOC 2 compliant with end-to-end encryption. Your data stays protected at every step.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔄</div>
-                <h3>Seamless Integration</h3>
-                <p>Connect with your existing stack. 200+ integrations with CRMs, email tools, and more.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Advanced Analytics</h3>
-                <p>Real-time insights and AI-powered recommendations to optimize every campaign.</p>
+                <button class="platform-btn">Get Started</button>
             </div>
         </div>
     </section>
     
     <!-- Auth Section -->
-    <section class="auth-section" id="auth-section">
+    <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Get Started Free</h2>
-            <p class="section-subtitle">14-day trial. No credit card required.</p>
-            <div id="api-status" class="status-badge" style="margin-top: 1rem;">Checking API...</div>
+            <h2 class="section-title">Get Started Today</h2>
+            <p class="section-subtitle">14-day free trial. No credit card required.</p>
         </div>
         
         <div id="user-profile" class="user-profile">
             <button class="logout-btn" onclick="logout()">Logout</button>
-            <h3>Welcome, <span id="user-name"></span>!</h3>
-            <p>Email: <span id="user-email"></span></p>
+            <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">Welcome, <span id="user-name"></span>!</h3>
+            <p style="color: var(--text-secondary);">Email: <span id="user-email"></span></p>
+            <div id="api-status" class="status-badge" style="margin-top: 1rem;">Checking API...</div>
         </div>
         
-        <div class="auth-container" id="auth-container">
+        <div class="auth-section" id="auth-section">
             <div class="auth-tabs">
                 <button class="tab-btn active" onclick="switchTab('login')">Login</button>
                 <button class="tab-btn" onclick="switchTab('register')">Register</button>
@@ -974,7 +974,7 @@
                     <label>Password</label>
                     <input type="password" name="password" required placeholder="Create password">
                 </div>
-                <button type="submit" class="btn">Register</button>
+                <button type="submit" class="btn">Start Free Trial</button>
                 <div class="divider"><span>OR</span></div>
                 <div id="google-register-btn" class="google-btn-container"></div>
             </form>
@@ -984,41 +984,27 @@
     </section>
     
     <!-- Testimonials -->
-    <section class="testimonials-section">
-        <div class="section-header">
-            <h2 class="section-title">Trusted by Industry Leaders</h2>
-            <p class="section-subtitle">See why 10,000+ teams choose AETHER for their outreach.</p>
-        </div>
-        
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <p>"AETHER's lead scoring transformed our sales pipeline. We increased conversions by 340% in the first quarter."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">JM</div>
-                    <div class="testimonial-info">
-                        <div class="name">James Mitchell</div>
-                        <div class="role">VP Sales, TechCorp</div>
-                    </div>
-                </div>
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-inner">
+            <div class="section-header">
+                <h2 class="section-title">What Our Users Say</h2>
+                <p class="section-subtitle">Join thousands of businesses scaling with AI Lead Strategies.</p>
             </div>
-            <div class="testimonial-card">
-                <p>"The unified inbox changed everything. Managing 22 channels from one place saves us 15+ hours weekly."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">SK</div>
-                    <div class="testimonial-info">
-                        <div class="name">Sarah Kim</div>
-                        <div class="role">Marketing Director, GrowthCo</div>
-                    </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p>"The lead scoring accuracy is incredible. We've cut our sales cycle in half and only talk to qualified prospects now."</p>
+                    <span class="author">— Sarah M., VP of Sales, B2B SaaS</span>
                 </div>
-            </div>
-            <div class="testimonial-card">
-                <p>"Built our lead-capture site in under 5 minutes. The AI content generation is genuinely impressive."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">RP</div>
-                    <div class="testimonial-info">
-                        <div class="name">Ryan Park</div>
-                        <div class="role">Founder, StartupX</div>
-                    </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p>"ClientContact AI replaced 3 tools we were paying for separately. One inbox for everything changed our workflow."</p>
+                    <span class="author">— Marcus T., Operations Lead, Marketing Agency</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p>"Built our entire lead capture funnel in 20 minutes. The AI suggestions for copy were spot-on."</p>
+                    <span class="author">— Jennifer K., Founder, E-commerce Brand</span>
                 </div>
             </div>
         </div>
@@ -1028,16 +1014,18 @@
     <footer class="footer">
         <div class="footer-inner">
             <div>
-                <div class="footer-brand">⚡ AETHER</div>
-                <p class="footer-copy">© 2026 AI Lead Strategies. All rights reserved.</p>
+                <div class="footer-brand">AI Lead Strategies</div>
+                <p style="font-size: 0.9rem;">The future of outreach marketing.</p>
             </div>
             <div class="footer-links">
                 <a href="#platforms">Platforms</a>
-                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#testimonials">Reviews</a>
                 <a href="/forgot-password.html">Forgot Password</a>
                 <a href="/dashboard.html">Dashboard</a>
             </div>
         </div>
+        <p class="footer-copy">© 2026 AI Lead Strategies. All rights reserved. | One Platform. Infinite Revenue.</p>
     </footer>
     
     <script>
@@ -1092,14 +1080,16 @@
         }
         
         async function checkAPIStatus() {
+            const statusEl = document.getElementById('api-status');
+            if (!statusEl) return;
             try {
                 const response = await fetch(`${API_URL}/health`);
                 const data = await response.json();
-                document.getElementById('api-status').textContent = '✅ API Connected';
-                document.getElementById('api-status').style.background = '#10b981';
+                statusEl.textContent = '✅ API Connected';
+                statusEl.style.background = '#10b981';
             } catch (error) {
-                document.getElementById('api-status').textContent = '❌ API Offline';
-                document.getElementById('api-status').style.background = '#ef4444';
+                statusEl.textContent = '❌ API Offline';
+                statusEl.style.background = '#ef4444';
             }
         }
         
@@ -1191,10 +1181,11 @@
         }
         
         function updateUIForLoggedInUser() {
-            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('auth-section').style.display = 'none';
             document.getElementById('user-profile').classList.add('active');
             document.getElementById('user-name').textContent = currentUser.name;
             document.getElementById('user-email').textContent = currentUser.email;
+            checkAPIStatus();
             if (!document.getElementById('dashboard-btn')) {
                 const profileDiv = document.getElementById('user-profile');
                 const dashboardBtn = document.createElement('button');
@@ -1211,7 +1202,7 @@
             localStorage.removeItem('authToken');
             authToken = null;
             currentUser = null;
-            document.getElementById('auth-container').style.display = 'block';
+            document.getElementById('auth-section').style.display = 'block';
             document.getElementById('user-profile').classList.remove('active');
             showMessage('Logged out successfully', 'success');
         }
