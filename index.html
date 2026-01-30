@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Lead Strategies - Lead Generation Platform</title>
+    <title>AI Lead Strategies - ONE PLATFORM INFINITE REVENUE</title>
     <!-- Google Sign-In -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
+            --primary-color: #00d4ff;
+            --primary-glow: rgba(0, 212, 255, 0.3);
+            --secondary-color: #7c3aed;
+            --accent-color: #f59e0b;
             --success-color: #10b981;
             --warning-color: #f59e0b;
             --error-color: #ef4444;
-            --dark-color: #1f2937;
-            --light-color: #f9fafb;
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
         }
         
         * {
@@ -25,20 +32,21 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--light-color);
+            background: var(--bg-dark);
             min-height: 100vh;
-            color: var(--dark-color);
+            color: var(--text-primary);
+            line-height: 1.6;
         }
         
-        /* Navbar - AETHER style */
+        /* Navbar - AETHER Dark Style */
         .navbar {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -47,7 +55,10 @@
         .navbar-brand {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -60,7 +71,7 @@
         }
         
         .navbar-links a {
-            color: #4b5563;
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
@@ -81,7 +92,7 @@
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.3s;
             border: none;
             font-size: 0.9375rem;
         }
@@ -94,7 +105,8 @@
         
         .btn-nav.outline:hover {
             background: var(--primary-color);
-            color: white;
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--primary-glow);
         }
         
         .btn-nav.primary {
@@ -103,52 +115,97 @@
         }
         
         .btn-nav.primary:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--primary-glow);
         }
         
-        /* Hero Section - AETHER style */
+        /* Hero Section - AETHER Dark Theme */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 4rem 2rem;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0f0f1a 100%);
+            padding: 6rem 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
         }
         
         .hero-inner {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
         }
         
         .hero h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-color) 50%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: -1px;
         }
         
         .hero .tagline {
-            font-size: 1.35rem;
-            opacity: 0.95;
-            margin-bottom: 2rem;
-            line-height: 1.5;
-        }
-        
-        .hero-badges {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .hero-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.875rem;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             font-weight: 500;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+        
+        .hero-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .hero-cta {
@@ -159,244 +216,272 @@
         }
         
         .btn-hero {
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 0.5rem;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             border: none;
             text-decoration: none;
         }
         
         .btn-hero.primary {
-            background: white;
-            color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
         }
         
         .btn-hero.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px var(--primary-glow);
         }
         
         .btn-hero.secondary {
             background: transparent;
-            color: white;
-            border: 2px solid rgba(255,255,255,0.8);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
         }
         
         .btn-hero.secondary:hover {
-            background: rgba(255,255,255,0.15);
-        }
-        
-        /* Stats strip */
-        .stats-strip {
-            background: white;
-            padding: 2rem;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .stats-strip-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        
-        .stat-item strong {
-            display: block;
-            font-size: 1.75rem;
+            border-color: var(--primary-color);
             color: var(--primary-color);
-            margin-bottom: 0.25rem;
         }
         
-        .stat-item span {
-            font-size: 0.875rem;
-            color: #6b7280;
+        /* Platforms Section - 5 Cards with Pricing */
+        .platforms-section {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
         }
         
-        /* Features Section */
-        .section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 20px;
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
         }
         
         .section-title {
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 0.5rem;
-            color: var(--dark-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .section-subtitle {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
             font-size: 1.1rem;
         }
         
-        .features-grid {
+        .platforms-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-        }
-        
-        .feature-card {
-            background: white;
-            padding: 1.75rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #e5e7eb;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .feature-card .icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark-color);
-        }
-        
-        .feature-card p {
-            color: #6b7280;
-            font-size: 0.9375rem;
-            line-height: 1.5;
-        }
-        
-        /* Container & Header (auth area) */
-        .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header.page-header {
-            background: white;
-            border-radius: 0.75rem;
-            padding: 2rem 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            border: 1px solid #e5e7eb;
-        }
-        
-        header.page-header h1 {
-            color: var(--primary-color);
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .tagline {
-            color: #6b7280;
-            font-size: 1.1rem;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            background: var(--success-color);
-            color: white;
-            border-radius: 2rem;
-            font-size: 0.8125rem;
-            margin-top: 1rem;
-            font-weight: 500;
-        }
-        
-        .platforms {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
         }
         
         .platform-card {
-            background: white;
-            border-radius: 0.75rem;
-            padding: 1.75rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
             cursor: pointer;
-            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         
         .platform-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px var(--primary-glow);
+        }
+        
+        .platform-card:hover::before {
+            opacity: 1;
         }
         
         .platform-icon {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(124, 58, 237, 0.2));
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            margin-bottom: 1.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
         }
         
         .platform-title {
-            font-size: 1.2rem;
-            color: var(--dark-color);
+            font-size: 1.25rem;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
         
         .platform-description {
-            color: #6b7280;
-            line-height: 1.5;
+            color: var(--text-secondary);
             font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
         }
         
-        .auth-section {
-            background: white;
+        .platform-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .price-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .price-period {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .platform-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .platform-features li {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            padding: 0.375rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .platform-features li::before {
+            content: '✓';
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .platform-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--accent-color), #dc2626);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #0f0f1a 0%, var(--bg-dark) 100%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border-radius: 0.75rem;
-            padding: 2rem 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+        
+        /* Auth Section */
+        .auth-section {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
+        }
+        
+        .auth-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2.5rem;
         }
         
         .auth-tabs {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .tab-btn {
-            padding: 0.75rem 1.5rem;
+            flex: 1;
+            padding: 0.875rem 1.5rem;
             border: none;
-            background: #f3f4f6;
+            background: transparent;
             border-radius: 0.5rem;
             cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
-            color: #6b7280;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
         }
         
         .tab-btn.active {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
+            border-color: transparent;
         }
         
         .auth-form {
@@ -413,43 +498,49 @@
         
         .form-group label {
             display: block;
-            margin-bottom: 0.35rem;
-            color: #374151;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 0.9375rem;
         }
         
         .form-group input {
             width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #d1d5db;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-color);
             border-radius: 0.5rem;
             font-size: 1rem;
-            transition: border-color 0.2s;
+            transition: all 0.3s;
+            background: var(--bg-dark);
+            color: var(--text-primary);
         }
         
         .form-group input:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        
+        .form-group input::placeholder {
+            color: var(--text-muted);
         }
         
         .btn {
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 0.875rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
             border-radius: 0.5rem;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.2s, transform 0.2s;
+            transition: all 0.3s;
             width: 100%;
         }
         
         .btn:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--primary-glow);
         }
         
         .divider {
@@ -457,7 +548,7 @@
             align-items: center;
             text-align: center;
             margin: 1.5rem 0;
-            color: #6b7280;
+            color: var(--text-muted);
             font-size: 0.875rem;
         }
         
@@ -465,7 +556,7 @@
         .divider::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .divider span {
@@ -478,36 +569,47 @@
         }
         
         .message {
-            padding: 0.75rem 1rem;
+            padding: 0.875rem 1rem;
             border-radius: 0.5rem;
             margin-top: 1rem;
             font-size: 0.9375rem;
         }
         
         .message.success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success-color);
+            border: 1px solid rgba(16, 185, 129, 0.3);
         }
         
         .message.error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--error-color);
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
         
         .user-profile {
-            background: white;
-            border-radius: 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            border: 1px solid #e5e7eb;
             display: none;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .user-profile.active {
             display: block;
+        }
+        
+        .user-profile h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .user-profile p {
+            color: var(--text-secondary);
         }
         
         .logout-btn {
@@ -526,51 +628,79 @@
             opacity: 0.9;
         }
         
-        /* Testimonials / Social proof */
-        .testimonials {
-            background: white;
-            padding: 3rem 2rem;
-            border-top: 1px solid #e5e7eb;
-        }
-        
-        .testimonials-inner {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Testimonials */
+        .testimonials-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0f0f1a 100%);
         }
         
         .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .testimonial-card {
-            background: var(--light-color);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            border: 1px solid #e5e7eb;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 1rem;
         }
         
         .testimonial-card p {
             font-style: italic;
-            color: #4b5563;
-            margin-bottom: 1rem;
-            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
         }
         
-        .testimonial-card .author {
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .testimonial-info .name {
             font-weight: 600;
-            color: var(--dark-color);
-            font-size: 0.9375rem;
+            color: var(--text-primary);
         }
         
-        /* Footer - AETHER style */
+        .testimonial-info .role {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        /* API Status */
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            background: var(--success-color);
+            color: white;
+            border-radius: 2rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+        
+        /* Footer - AETHER Dark */
         .footer {
-            background: var(--dark-color);
-            color: #9ca3af;
-            padding: 2.5rem 2rem;
-            margin-top: 3rem;
+            background: #050508;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 3rem 2rem;
         }
         
         .footer-inner {
@@ -585,7 +715,10 @@
         .footer-brand {
             font-size: 1.25rem;
             font-weight: bold;
-            color: white;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
         }
         
@@ -595,13 +728,14 @@
         }
         
         .footer-links a {
-            color: #9ca3af;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9375rem;
+            transition: color 0.2s;
         }
         
         .footer-links a:hover {
-            color: white;
+            color: var(--primary-color);
         }
         
         .footer-copy {
@@ -611,19 +745,21 @@
         }
         
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero .tagline { font-size: 1.1rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero .tagline { font-size: 1.1rem; letter-spacing: 1px; }
             .navbar-links { display: none; }
+            .hero-stats { gap: 1.5rem; }
+            .hero-stat-value { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="navbar-brand">🚀 AI Lead Strategies</div>
+        <div class="navbar-brand">⚡ AETHER</div>
         <div class="navbar-links">
-            <a href="#features">Features</a>
             <a href="#platforms">Platforms</a>
+            <a href="#features">Features</a>
             <a href="#auth-section">Sign In</a>
         </div>
         <div class="navbar-cta">
@@ -635,65 +771,169 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-inner">
-            <h1>AI-Powered Lead Generation for Modern Teams</h1>
-            <p class="tagline">Unify lead scoring, outreach, and CRM in one platform. Start your 14-day free trial—no credit card required.</p>
-            <div class="hero-badges">
-                <span class="hero-badge">✓ 14-Day Free Trial</span>
-                <span class="hero-badge">✓ No Credit Card</span>
-                <span class="hero-badge">✓ Cancel Anytime</span>
+            <span class="hero-label">AI-Powered Marketing Suite</span>
+            <h1>ONE PLATFORM<br>INFINITE REVENUE</h1>
+            <p class="tagline">THE FUTURE OF OUTREACH MARKETING</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">92%</div>
+                    <div class="hero-stat-label">Lead Accuracy</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">5x</div>
+                    <div class="hero-stat-label">ROI Increase</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">22+</div>
+                    <div class="hero-stat-label">Channels</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">10K+</div>
+                    <div class="hero-stat-label">Active Users</div>
+                </div>
             </div>
             <div class="hero-cta">
                 <a href="#auth-section" class="btn-hero primary" onclick="switchTab('register'); return true;">Start Free Trial</a>
-                <a href="#platforms" class="btn-hero secondary">View Platforms</a>
+                <a href="#platforms" class="btn-hero secondary">View Pricing</a>
             </div>
         </div>
     </section>
     
-    <!-- Stats strip -->
-    <div class="stats-strip">
-        <div class="stats-strip-inner">
-            <div class="stat-item"><strong>92%</strong><span>Lead Scoring Accuracy</span></div>
-            <div class="stat-item"><strong>22+</strong><span>Channels Supported</span></div>
-            <div class="stat-item"><strong>3 min</strong><span>Site Build Time</span></div>
-            <div class="stat-item"><strong>87%</strong><span>Higher Engagement</span></div>
+    <!-- Platforms Section - 5 Cards with Pricing -->
+    <section class="platforms-section" id="platforms">
+        <div class="section-header">
+            <h2 class="section-title">Choose Your Platform</h2>
+            <p class="section-subtitle">Five powerful AI tools, one unified ecosystem. Scale your outreach with precision.</p>
         </div>
-    </div>
+        
+        <div class="platforms-grid">
+            <!-- Platform 1: LeadSite AI -->
+            <div class="platform-card" onclick="showPlatformDetails('leadsite.ai')">
+                <span class="platform-badge">Most Popular</span>
+                <div class="platform-icon">🎯</div>
+                <h3 class="platform-title">LeadSite AI</h3>
+                <p class="platform-description">AI-powered lead scoring and enrichment with 92% accuracy. Turn data into qualified opportunities.</p>
+                <div class="platform-price">
+                    <span class="price-amount">$49</span>
+                    <span class="price-period">/month</span>
+                </div>
+                <ul class="platform-features">
+                    <li>AI Lead Scoring</li>
+                    <li>Contact Enrichment</li>
+                    <li>CRM Integration</li>
+                    <li>Unlimited Searches</li>
+                </ul>
+            </div>
+            
+            <!-- Platform 2: LeadSite IO -->
+            <div class="platform-card" onclick="showPlatformDetails('leadsite.io')">
+                <div class="platform-icon">🏗️</div>
+                <h3 class="platform-title">LeadSite IO</h3>
+                <p class="platform-description">AI website builder that creates lead-capture sites in 3 minutes. No coding required.</p>
+                <div class="platform-price">
+                    <span class="price-amount">$29</span>
+                    <span class="price-period">/month</span>
+                </div>
+                <ul class="platform-features">
+                    <li>Drag & Drop Builder</li>
+                    <li>AI Content Generation</li>
+                    <li>Custom Domains</li>
+                    <li>Analytics Dashboard</li>
+                </ul>
+            </div>
+            
+            <!-- Platform 3: ClientContact AI -->
+            <div class="platform-card" onclick="showPlatformDetails('clientcontact.ai')">
+                <div class="platform-icon">📬</div>
+                <h3 class="platform-title">ClientContact AI</h3>
+                <p class="platform-description">Unified inbox for 22+ channels with AI auto-responder. Never miss a lead again.</p>
+                <div class="platform-price">
+                    <span class="price-amount">$79</span>
+                    <span class="price-period">/month</span>
+                </div>
+                <ul class="platform-features">
+                    <li>22+ Channel Support</li>
+                    <li>AI Auto-Responder</li>
+                    <li>Conversation Analytics</li>
+                    <li>Team Collaboration</li>
+                </ul>
+            </div>
+            
+            <!-- Platform 4: VideoSite AI -->
+            <div class="platform-card" onclick="showPlatformDetails('videosite.ai')">
+                <div class="platform-icon">🎬</div>
+                <h3 class="platform-title">VideoSite AI</h3>
+                <p class="platform-description">AI-powered video marketing with 87% higher engagement. Create, host, and convert.</p>
+                <div class="platform-price">
+                    <span class="price-amount">$59</span>
+                    <span class="price-period">/month</span>
+                </div>
+                <ul class="platform-features">
+                    <li>AI Video Generation</li>
+                    <li>Personalization Engine</li>
+                    <li>Video Analytics</li>
+                    <li>Embed Anywhere</li>
+                </ul>
+            </div>
+            
+            <!-- Platform 5: OutreachPro AI -->
+            <div class="platform-card" onclick="showPlatformDetails('outreachpro.ai')">
+                <span class="platform-badge">New</span>
+                <div class="platform-icon">🚀</div>
+                <h3 class="platform-title">OutreachPro AI</h3>
+                <p class="platform-description">Automated multi-channel outreach campaigns. Email, LinkedIn, and SMS at scale.</p>
+                <div class="platform-price">
+                    <span class="price-amount">$99</span>
+                    <span class="price-period">/month</span>
+                </div>
+                <ul class="platform-features">
+                    <li>Multi-Channel Sequences</li>
+                    <li>AI Personalization</li>
+                    <li>A/B Testing</li>
+                    <li>Deliverability Suite</li>
+                </ul>
+            </div>
+        </div>
+    </section>
     
     <!-- Features Section -->
-    <section class="section" id="features">
-        <h2 class="section-title">Why AI Lead Strategies</h2>
-        <p class="section-subtitle">One platform to capture, score, and convert more leads.</p>
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <h2 class="section-title">Why AETHER</h2>
+            <p class="section-subtitle">Enterprise-grade AI tools built for modern marketing teams.</p>
+        </div>
+        
         <div class="features-grid">
             <div class="feature-card">
-                <div class="icon">🎯</div>
-                <h3>AI Lead Scoring</h3>
-                <p>Prioritize the best leads with AI-powered scoring and enrichment. Focus on what matters.</p>
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Deploy campaigns in minutes, not days. Our AI handles the heavy lifting so you can focus on strategy.</p>
             </div>
             <div class="feature-card">
-                <div class="icon">🏗️</div>
-                <h3>Instant Landing Sites</h3>
-                <p>Create lead-capture sites in minutes. No coding required.</p>
+                <div class="feature-icon">🔒</div>
+                <h3>Enterprise Security</h3>
+                <p>SOC 2 compliant with end-to-end encryption. Your data stays protected at every step.</p>
             </div>
             <div class="feature-card">
-                <div class="icon">📬</div>
-                <h3>Unified Inbox</h3>
-                <p>Manage 22+ channels in one inbox with AI auto-responder.</p>
+                <div class="feature-icon">🔄</div>
+                <h3>Seamless Integration</h3>
+                <p>Connect with your existing stack. 200+ integrations with CRMs, email tools, and more.</p>
             </div>
             <div class="feature-card">
-                <div class="icon">🎬</div>
-                <h3>Video Marketing</h3>
-                <p>AI-powered video that drives 87% higher engagement.</p>
+                <div class="feature-icon">📊</div>
+                <h3>Advanced Analytics</h3>
+                <p>Real-time insights and AI-powered recommendations to optimize every campaign.</p>
             </div>
         </div>
     </section>
     
-    <!-- Auth & Platform Section -->
-    <div class="container">
-        <header class="page-header">
-            <h1>🚀 AI Lead Strategies</h1>
-            <p class="tagline">Powerful AI-Driven Lead Generation Platform</p>
-            <div id="api-status" class="status-badge">Checking API...</div>
-        </header>
+    <!-- Auth Section -->
+    <section class="auth-section" id="auth-section">
+        <div class="section-header">
+            <h2 class="section-title">Get Started Free</h2>
+            <p class="section-subtitle">14-day trial. No credit card required.</p>
+            <div id="api-status" class="status-badge" style="margin-top: 1rem;">Checking API...</div>
+        </div>
         
         <div id="user-profile" class="user-profile">
             <button class="logout-btn" onclick="logout()">Logout</button>
@@ -701,7 +941,7 @@
             <p>Email: <span id="user-email"></span></p>
         </div>
         
-        <div class="auth-section" id="auth-section">
+        <div class="auth-container" id="auth-container">
             <div class="auth-tabs">
                 <button class="tab-btn active" onclick="switchTab('login')">Login</button>
                 <button class="tab-btn" onclick="switchTab('register')">Register</button>
@@ -741,51 +981,44 @@
             
             <div id="auth-message"></div>
         </div>
-        
-        <h2 class="section-title" id="platforms">Our Platforms</h2>
-        <p class="section-subtitle">Choose the tools that fit your workflow. All included in one subscription.</p>
-        
-        <div class="platforms">
-            <div class="platform-card" onclick="showPlatformDetails('leadsite.ai')">
-                <div class="platform-icon">🎯</div>
-                <h3 class="platform-title">LeadSite AI</h3>
-                <p class="platform-description">AI-powered lead scoring and enrichment with 92% accuracy.</p>
-            </div>
-            <div class="platform-card" onclick="showPlatformDetails('leadsite.io')">
-                <div class="platform-icon">🏗️</div>
-                <h3 class="platform-title">LeadSite IO</h3>
-                <p class="platform-description">AI website builder that creates lead-capture sites in 3 minutes.</p>
-            </div>
-            <div class="platform-card" onclick="showPlatformDetails('clientcontact.ai')">
-                <div class="platform-icon">📬</div>
-                <h3 class="platform-title">ClientContact AI</h3>
-                <p class="platform-description">Unified inbox for 22+ channels with AI auto-responder.</p>
-            </div>
-            <div class="platform-card" onclick="showPlatformDetails('videosite.ai')">
-                <div class="platform-icon">🎬</div>
-                <h3 class="platform-title">VideoSite AI</h3>
-                <p class="platform-description">AI-powered video marketing with 87% higher engagement.</p>
-            </div>
-        </div>
-    </div>
+    </section>
     
     <!-- Testimonials -->
-    <section class="testimonials">
-        <div class="testimonials-inner">
-            <h2 class="section-title">Trusted by Teams</h2>
-            <p class="section-subtitle">See what others say about AI Lead Strategies.</p>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p>"Lead scoring accuracy saved us dozens of hours. We only talk to hot leads now."</p>
-                    <span class="author">— Marketing Lead, B2B SaaS</span>
+    <section class="testimonials-section">
+        <div class="section-header">
+            <h2 class="section-title">Trusted by Industry Leaders</h2>
+            <p class="section-subtitle">See why 10,000+ teams choose AETHER for their outreach.</p>
+        </div>
+        
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"AETHER's lead scoring transformed our sales pipeline. We increased conversions by 340% in the first quarter."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JM</div>
+                    <div class="testimonial-info">
+                        <div class="name">James Mitchell</div>
+                        <div class="role">VP Sales, TechCorp</div>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <p>"The unified inbox replaced three tools. One place for email, social, and chat."</p>
-                    <span class="author">— Sales Ops, Agency</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"The unified inbox changed everything. Managing 22 channels from one place saves us 15+ hours weekly."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">SK</div>
+                    <div class="testimonial-info">
+                        <div class="name">Sarah Kim</div>
+                        <div class="role">Marketing Director, GrowthCo</div>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <p>"Built our first lead-capture site in under 5 minutes. No dev needed."</p>
-                    <span class="author">— Founder, Startup</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"Built our lead-capture site in under 5 minutes. The AI content generation is genuinely impressive."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">RP</div>
+                    <div class="testimonial-info">
+                        <div class="name">Ryan Park</div>
+                        <div class="role">Founder, StartupX</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -795,12 +1028,12 @@
     <footer class="footer">
         <div class="footer-inner">
             <div>
-                <div class="footer-brand">AI Lead Strategies</div>
+                <div class="footer-brand">⚡ AETHER</div>
                 <p class="footer-copy">© 2026 AI Lead Strategies. All rights reserved.</p>
             </div>
             <div class="footer-links">
-                <a href="#features">Features</a>
                 <a href="#platforms">Platforms</a>
+                <a href="#features">Features</a>
                 <a href="/forgot-password.html">Forgot Password</a>
                 <a href="/dashboard.html">Dashboard</a>
             </div>
@@ -826,7 +1059,7 @@
                         });
                         google.accounts.id.renderButton(loginContainer, {
                             type: 'standard',
-                            theme: 'outline',
+                            theme: 'filled_black',
                             size: 'large',
                             text: 'signin_with',
                             shape: 'rectangular',
@@ -838,7 +1071,7 @@
                     if (registerContainer && registerContainer.children.length === 0) {
                         google.accounts.id.renderButton(registerContainer, {
                             type: 'standard',
-                            theme: 'outline',
+                            theme: 'filled_black',
                             size: 'large',
                             text: 'continue_with',
                             shape: 'rectangular',
@@ -958,7 +1191,7 @@
         }
         
         function updateUIForLoggedInUser() {
-            document.getElementById('auth-section').style.display = 'none';
+            document.getElementById('auth-container').style.display = 'none';
             document.getElementById('user-profile').classList.add('active');
             document.getElementById('user-name').textContent = currentUser.name;
             document.getElementById('user-email').textContent = currentUser.email;
@@ -968,7 +1201,7 @@
                 dashboardBtn.id = 'dashboard-btn';
                 dashboardBtn.className = 'btn';
                 dashboardBtn.textContent = '🚀 Go to Dashboard';
-                dashboardBtn.style.marginTop = '10px';
+                dashboardBtn.style.marginTop = '15px';
                 dashboardBtn.onclick = () => window.location.href = '/dashboard.html';
                 profileDiv.appendChild(dashboardBtn);
             }
@@ -978,7 +1211,7 @@
             localStorage.removeItem('authToken');
             authToken = null;
             currentUser = null;
-            document.getElementById('auth-section').style.display = 'block';
+            document.getElementById('auth-container').style.display = 'block';
             document.getElementById('user-profile').classList.remove('active');
             showMessage('Logged out successfully', 'success');
         }
@@ -986,6 +1219,7 @@
         function showPlatformDetails(platform) {
             if (!authToken) {
                 showMessage('Please login to access platform features', 'error');
+                document.getElementById('auth-section').scrollIntoView({behavior:'smooth'});
                 return;
             }
             window.location.href = `/dashboard.html?domain=${platform}`;
