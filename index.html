@@ -609,10 +609,188 @@
             margin-top: 1rem;
             width: 100%;
         }
+
+        /* AETHER dark theme overrides */
+        :root {
+            --primary-color: #7c5cff;
+            --secondary-color: #22d3ee;
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            --error-color: #f87171;
+            --dark-color: #e5e7eb;
+            --light-color: #0b0f1a;
+            --surface-color: #0f172a;
+            --surface-elevated: #111827;
+            --surface-card: #111a2b;
+            --muted-color: #94a3b8;
+            --border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        body {
+            background: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        .navbar {
+            background: rgba(11, 15, 26, 0.85);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            color: var(--dark-color);
+        }
+
+        .navbar-links a {
+            color: var(--muted-color);
+        }
+
+        .navbar-links a:hover {
+            color: var(--dark-color);
+        }
+
+        .btn-nav.primary {
+            box-shadow: 0 10px 30px rgba(124, 92, 255, 0.35);
+        }
+
+        .hero {
+            background: radial-gradient(1200px circle at 20% 0%, rgba(124, 92, 255, 0.35) 0%, rgba(11, 15, 26, 0.95) 45%, #0b0f1a 80%);
+        }
+
+        .hero h1 {
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero .tagline {
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: rgba(229, 231, 235, 0.85);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: rgba(229, 231, 235, 0.8);
+            max-width: 720px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-badge {
+            background: rgba(124, 92, 255, 0.18);
+            border: 1px solid rgba(124, 92, 255, 0.35);
+        }
+
+        .stats-strip {
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stat-item span {
+            color: var(--muted-color);
+        }
+
+        .section-title {
+            color: var(--dark-color);
+        }
+
+        .section-subtitle,
+        .feature-card p,
+        .platform-description,
+        .tagline,
+        .footer-copy,
+        .footer-links a {
+            color: var(--muted-color);
+        }
+
+        .feature-card,
+        header.page-header,
+        .platform-card,
+        .auth-section,
+        .user-profile {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        }
+
+        header.page-header {
+            background: var(--surface-elevated);
+        }
+
+        .platform-price {
+            margin-top: 0.75rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .platform-title,
+        .testimonial-card .author {
+            color: var(--dark-color);
+        }
+
+        .tab-btn {
+            background: rgba(148, 163, 184, 0.12);
+            color: var(--muted-color);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: #0b0f1a;
+        }
+
+        .form-group label {
+            color: var(--muted-color);
+        }
+
+        .form-group input {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid var(--border-color);
+            color: var(--dark-color);
+        }
+
+        .form-group input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+        }
+
+        .divider {
+            color: var(--muted-color);
+        }
+
+        .divider::before,
+        .divider::after {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .testimonials {
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .testimonial-card {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial-card p {
+            color: var(--muted-color);
+        }
+
+        .footer {
+            background: #070a12;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-links a:hover {
+            color: var(--dark-color);
+        }
         
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero .tagline { font-size: 1.1rem; }
+            .hero h1 { font-size: 2rem; letter-spacing: 0.05em; }
+            .hero .tagline { font-size: 0.95rem; letter-spacing: 0.15em; }
+            .hero-subtitle { font-size: 0.95rem; }
             .navbar-links { display: none; }
         }
     </style>
@@ -635,12 +813,13 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-inner">
-            <h1>AI-Powered Lead Generation for Modern Teams</h1>
-            <p class="tagline">Unify lead scoring, outreach, and CRM in one platform. Start your 14-day free trial—no credit card required.</p>
+            <h1>ONE PLATFORM INFINITE REVENUE</h1>
+            <p class="tagline">THE FUTURE OF OUTREACH MARKETING</p>
+            <p class="hero-subtitle">Unify lead scoring, outreach, and conversions with the AETHER revenue stack.</p>
             <div class="hero-badges">
-                <span class="hero-badge">✓ 14-Day Free Trial</span>
-                <span class="hero-badge">✓ No Credit Card</span>
-                <span class="hero-badge">✓ Cancel Anytime</span>
+                <span class="hero-badge">✓ 5-Platform Suite</span>
+                <span class="hero-badge">✓ AI-Powered Outreach</span>
+                <span class="hero-badge">✓ Revenue-Ready Data</span>
             </div>
             <div class="hero-cta">
                 <a href="#auth-section" class="btn-hero primary" onclick="switchTab('register'); return true;">Start Free Trial</a>
@@ -742,29 +921,39 @@
             <div id="auth-message"></div>
         </div>
         
-        <h2 class="section-title" id="platforms">Our Platforms</h2>
-        <p class="section-subtitle">Choose the tools that fit your workflow. All included in one subscription.</p>
+        <h2 class="section-title" id="platforms">Platform Suite</h2>
+        <p class="section-subtitle">Five revenue engines. Flexible pricing. Bundle everything with the AETHER suite.</p>
         
         <div class="platforms">
             <div class="platform-card" onclick="showPlatformDetails('leadsite.ai')">
                 <div class="platform-icon">🎯</div>
                 <h3 class="platform-title">LeadSite AI</h3>
                 <p class="platform-description">AI-powered lead scoring and enrichment with 92% accuracy.</p>
+                <p class="platform-price">From $149/mo</p>
             </div>
             <div class="platform-card" onclick="showPlatformDetails('leadsite.io')">
                 <div class="platform-icon">🏗️</div>
                 <h3 class="platform-title">LeadSite IO</h3>
                 <p class="platform-description">AI website builder that creates lead-capture sites in 3 minutes.</p>
+                <p class="platform-price">From $99/mo</p>
             </div>
             <div class="platform-card" onclick="showPlatformDetails('clientcontact.ai')">
                 <div class="platform-icon">📬</div>
                 <h3 class="platform-title">ClientContact AI</h3>
                 <p class="platform-description">Unified inbox for 22+ channels with AI auto-responder.</p>
+                <p class="platform-price">From $129/mo</p>
             </div>
             <div class="platform-card" onclick="showPlatformDetails('videosite.ai')">
                 <div class="platform-icon">🎬</div>
                 <h3 class="platform-title">VideoSite AI</h3>
                 <p class="platform-description">AI-powered video marketing with 87% higher engagement.</p>
+                <p class="platform-price">From $199/mo</p>
+            </div>
+            <div class="platform-card" onclick="showPlatformDetails('tackle.ai')">
+                <div class="platform-icon">💼</div>
+                <h3 class="platform-title">Tackle AI</h3>
+                <p class="platform-description">AI sales assistant to move deals through your pipeline faster.</p>
+                <p class="platform-price">From $79/mo</p>
             </div>
         </div>
     </div>
