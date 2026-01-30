@@ -3,19 +3,35 @@
 
 const isDevelopment = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost';
 
+// Production backend URL
+const PRODUCTION_API_URL = 'https://backend-production-2987.up.railway.app';
+
 // Configure your API endpoints here
 const API_CONFIG = {
   // Base URL for your API
-  // For production, this might be a different domain or subdomain
   BASE_URL: isDevelopment 
     ? 'http://localhost:3001' // Your local backend server
-    : window.location.origin, // Same domain in production
+    : PRODUCTION_API_URL, // Railway production backend
+  
+  // Google OAuth Client ID
+  GOOGLE_CLIENT_ID: '1022885462325-705kc6vuv96f828iegacs6p8csjr09dk.apps.googleusercontent.com',
   
   // Specific endpoints
   ENDPOINTS: {
+    // Auth endpoints
+    LOGIN: '/api/auth/login',
+    REGISTER: '/api/auth/register',
+    GOOGLE_AUTH: '/api/auth/google',
+    ME: '/api/auth/me',
+    FORGOT_PASSWORD: '/api/auth/forgot-password',
+    RESET_PASSWORD: '/api/auth/reset-password',
+    // Dashboard endpoints
+    DASHBOARD: '/api/dashboard',
+    // Other endpoints
     UPLOAD: '/api/upload',
     VIDEOS: '/api/videos',
     USER: '/api/user',
+    HEALTH: '/health',
   }
 };
 
